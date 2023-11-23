@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Mermaid from "../../../utils/Mermaid";
 import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
 // import { listado } from "../../utils/proyects";
+import Typewriter from 'typewriter-effect';
+
 
 let idProject
 let apikey
@@ -22,13 +24,60 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
+  // const getTema = async () => {
+  //   try {
+  //     const tema = await listado();
+  //     setProyecto(tema.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+    
+  //   getTema();
+
+  // }, []);
+
+
+  // const [nombre, setNombre] = useState('')
+  // const [prompts, setPrompts] = useState('')
+  // const [respuesta, setRespuesta] = useState('')
+
+  // const handleNombre = (e) => {
+  //   setNombre(e.target.value)
+  //   console.log(nombre);
+  // }
+
+  // const handlePrompts = (e) => {
+  // setPrompts(e.target.value)
+  // console.log(prompts);
+  // }
+
+  // const handleRespuesta = (e) => {
+  //     setRespuesta(e.target.value)
+  //     console.log(respuesta);
+  // }
+
+  // const onSubmit = async (e) => {
+  //     e.preventDefault();
+  //     const data = {
+  //         nombre,
+  //         prompts,
+  //         respuesta,
+          
+  //     }
+  //     const res = await registerArtifact(data)
+  //     console.log(data)
+  //     console.log(res)
+  //   };
 
   return (
     <div className="App">
-      <div className="outer">
-        <div>
-          <div className="title-map-box">Prompt de entrada</div>
-          <div className="textarea">
+      <div className="outer parametros-textos">
+        <div className="text-extendido-textos">
+          <div>Prompt de entrada</div>
+          <div className="textarea text-extendido  salida-extendido-textos">
             <textarea
               id="prompt"
               name="prompt"
@@ -37,9 +86,9 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div>
-          <div className="title-map-box">Salida</div>
-          <div className="textarea">
+        <div className="text-extendido-textos">
+          <div>Salida</div>
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -47,8 +96,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
+      <button  className="btn form-control btn btn-outline-dark mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
     </div>
   );
 }
@@ -108,8 +156,8 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="password"
           id="token"
-          name="token"
           className="form-control bg-dark text-white mb-3"
+          name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -118,8 +166,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="model">Motor GPT:</label>
         <select
           name="model"
-          id="model"
           className="form-control bg-dark text-white mb-3"
+          id="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -145,8 +193,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          id="temperature"
           className="form-control bg-dark text-white mb-3"
+          id="temperature"
           name="temperature"
           value={temperature}
           onChange={handleTemperatureChange}
@@ -168,7 +216,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -189,7 +237,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -202,7 +250,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'Mapa seis sombreros'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -220,32 +268,35 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
-\t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
+      `Usa la tecnica de los 6 sombreros basado en las aportaciones del usuario como estos ejemplos:
 
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      Tecnica de los seis sombreros para pensar:
+      \t\tSombrero Blanco (Hechos y Datos):
+      \t\t\t\tContamos con datos objetivos que respaldan nuestra estrategia en Lean Startup, como el rápido aumento en la adopción de asistentes virtuales en entornos empresariales, según estudios de mercado recientes.
+      \t\t\t\tLas métricas de negocio respaldan nuestro enfoque actual, ya que hemos experimentado una mejora del 30% en la eficiencia del equipo desde la implementación del asistente virtual.
+      \t\t\t\tLa evidencia concreta de que nuestra hipótesis está siendo validada se refleja en la reducción del tiempo dedicado a tareas administrativas, liberando recursos para actividades más estratégicas.
+      \t\tSombrero Rojo (Emociones e Intuición):
+      \t\t\t\tEl equipo se siente entusiasmado y motivado por la dirección actual del proyecto en Lean Startup, ya que ven resultados tangibles que mejoran su día a día.
+      \t\t\t\tLa intuición general es positiva, respaldada por la retroalimentación emocional del equipo, quienes perciben el asistente virtual como una herramienta valiosa para la gestión de proyectos.
+      \t\t\t\tLas emociones positivas, como la satisfacción por la simplificación de procesos, influyen en nuestras decisiones, fortaleciendo el compromiso con la estrategia actual.
+      \t\tSombrero Negro (Pensamiento Crítico):
+      \t\t\t\tIdentificamos posibles obstáculos, como la resistencia al cambio entre algunos miembros del equipo, que podrían afectar la implementación del asistente virtual.
+      \t\t\t\tReconocemos los posibles problemas futuros, como desafíos de integración con otras plataformas, y estamos preparados para abordarlos proactivamente.
+      \t\t\t\t Al evaluar nuestra estrategia, tenemos en cuenta aspectos negativos como posibles brechas de seguridad, asegurando una implementación sólida y confiable.
+      \t\tSombrero Amarillo (Pensamiento Positivo):
+      \t\t\t\tLas oportunidades de continuar con nuestra estrategia actual incluyen la posibilidad de mejorar aún más la productividad y la calidad del trabajo, consolidando nuestra posición en el mercado.
+      \t\t\t\tAspectos positivos derivados de Lean Startup son la optimización de recursos y la capacidad de adaptación rápida a cambios en el entorno empresarial.
+      \t\t\t\tNuestras ventajas sobre otras alternativas incluyen la personalización del asistente virtual para cumplir con los requisitos específicos de la gestión de proyectos.
+      \t\tSombrero Verde (Creatividad e Ideas):
+      \t\t\t\tGeneramos ideas innovadoras, como la incorporación de funciones de aprendizaje automático para anticipar las necesidades del equipo y ofrecer sugerencias proactivas.
+      \t\t\t\tAbordamos desafíos actuales de manera diferente explorando la integración de interfaces de voz para una interacción más intuitiva con el asistente virtual.
+      \t\t\t\tSoluciones creativas incluyen el desarrollo de una interfaz de usuario altamente intuitiva y la exploración de integraciones con herramientas de gestión de proyectos de última generación.
+      \t\tSombrero Azul (Gestión del Proceso):
+      \t\t\t\tOrganizamos la discusión de manera efectiva, estableciendo reuniones periódicas de revisión de avances y retroalimentación para garantizar la alineación del equipo.
+      \t\t\t\tEl plan de acción incluye la implementación gradual de nuevas funcionalidades del asistente virtual, con evaluaciones regulares para ajustar la estrategia según sea necesario.
+      \t\t\t\tGarantizamos la alineación del equipo mediante la comunicación abierta y la formación continua para aprovechar al máximo las capacidades del asistente virtual.
+
+      Solo una raíz, deja el titulo como encabezado y respeta la jerarquia de los sobreros Y responde cada pregunta plateada, No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,7 +320,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Realiza la tecnica de los 6 sombreros para pensar teniendo como enfoque dar una solución al tema:" + prompt + "Atravez de ideas inovadoras."
         }
       ],
       stream: true,
@@ -326,6 +377,16 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         try {
           const parsed = JSON.parse(message);
           let result = parsed.choices[0].delta.content || "";
+
+          <Typewriter
+          onInit={(typewriter) => {
+            typewriter.typeString(result)
+            .pauseFor(2500)
+            .start();
+          }
+        }
+
+        />
 
           // Agregue cada línea a la cadena de resultados
           if (

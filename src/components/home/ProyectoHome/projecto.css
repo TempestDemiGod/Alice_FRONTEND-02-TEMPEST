@@ -1,0 +1,26 @@
+.card{
+    width: 18rem;
+    min-width: 18rem;
+    height: 20rem;
+    margin: .5vw;
+}
+.card-box{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.top-poject-contenedor{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.limite-proyecto{
+    max-width: 70vw;
+    overflow: hidden;
+}
+.nombre-proyecto{
+    color: #424242 ;
+}
+.tema-proyecto{
+    color: rgb(230, 92, 46);
+}

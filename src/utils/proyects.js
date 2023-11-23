@@ -29,5 +29,21 @@ export const registerProject = async (data) => {
     }
   }
   
+  export const elimarProyecto = async (data) => {
+    try {
+      console.log('a eliminar x2 ...  '+ data.id )
+      console.log(data )
+      let id = data.id
+    const response = await axios.delete(`${URL_link}/deleteProject`, {
+      data : {
+        id
+      }
+    })
+    console.log(response)
+    return response
+    } catch (error) {
+      return error.response
+    }
+  }
   
   

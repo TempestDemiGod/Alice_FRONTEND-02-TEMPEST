@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Mermaid from "../../../utils/Mermaid";
 import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
 // import { listado } from "../../utils/proyects";
+import Typewriter from 'typewriter-effect';
+
 
 let idProject
 let apikey
@@ -23,12 +25,13 @@ async function verProyecto(){
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
 
+
   return (
     <div className="App">
-      <div className="outer">
-        <div>
-          <div className="title-map-box">Prompt de entrada</div>
-          <div className="textarea">
+      <div className="outer parametros-textos">
+        <div className="text-extendido-textos">
+          <div>Prompt de entrada</div>
+          <div className="textarea text-extendido salida-extendido-textos">
             <textarea
               id="prompt"
               name="prompt"
@@ -37,9 +40,9 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div>
-          <div className="title-map-box">Salida</div>
-          <div className="textarea">
+        <div className="text-extendido-textos">
+          <div >Salida</div>
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -47,8 +50,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
+      <button className="btn form-control btn btn-outline-dark mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
     </div>
   );
 }
@@ -108,8 +110,8 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="password"
           id="token"
-          name="token"
           className="form-control bg-dark text-white mb-3"
+          name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -145,8 +147,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          id="temperature"
           className="form-control bg-dark text-white mb-3"
+          id="temperature"
           name="temperature"
           value={temperature}
           onChange={handleTemperatureChange}
@@ -157,8 +159,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
+          className="form-control bg-dark text-white mb-3"
           name="promptTemplate"
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
@@ -168,7 +170,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -189,7 +191,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -202,7 +204,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'User Persona'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -220,32 +222,49 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
-\t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
+      `Cree un User Persona basado en las aportaciones del usuario como estos ejemplos:
+       User Persona:
+       \t\tNombre: José García
+       \t\t\t\tDemografía:
+       \t\t\t\t\t\tEdad: 28 años
+       \t\t\t\tGénero: Masculino
+       \t\t\t\tUbicación: Trujillo, Perú
+       \t\t\t\tNivel de Educación: Estudiante universitario a punto de graduarse
+       \t\t\t\tDatos de trabajo:
+       \t\t\t\t\t\tOcupación: Estudiante de Ingeniería de Sistemas
+       \t\t\t\t\t\tEmpresa: Proyectos Innovadores SAC (pasante)
+       \t\t\t\t\t\tNivel de experiencia: Prácticas profesionales en gestión de proyectos
+       \t\t\t\tDesafíos y necesidades:
+       \t\t\t\t\t\tDesafío: Coordinar eficientemente tareas y plazos en proyectos complejos.
+       \t\t\t\t\t\tNecesidad: Una herramienta que simplifique la gestión de proyectos y mejore la colaboración en equipos distribuidos.
+       \t\t\t\tObjetivos y deseos:
+       \t\t\t\t\t\tObjetivo Profesional: Destacar en su pasantía y obtener habilidades sólidas en la gestión de proyectos.
+       \t\t\t\t\t\tDeseo Personal: Lograr un equilibrio entre el trabajo y los estudios sin comprometer la calidad de su desempeño.
+       \t\t\t\tComportamiento de compra:
+       \t\t\t\t\t\tInvestiga en blogs y redes sociales sobre herramientas de gestión de proyectos.
+       \t\t\t\t\t\tPrefiere probar versiones gratuitas antes de comprometerse a comprar.
+       \t\t\t\t\t\tValora la opinión de otros estudiantes y profesionales en su red.
+       \t\t\t\tComportamiento en línea:
+       \t\t\t\t\t\tActivo en LinkedIn para networking y búsqueda de oportunidades laborales.
+       \t\t\t\t\t\tParticipa en grupos de estudiantes de ingeniería en Facebook.
+       \t\t\t\t\t\tLee blogs de tecnología y gestión de proyectos.
+       \t\t\t\tFrustraciones actuales:
+       \t\t\t\t\t\tDificultad para coordinar reuniones efectivas con compañeros de proyecto.
+       \t\t\t\t\t\tPérdida de información importante debido a la falta de centralización en las herramientas utilizadas.
+       \t\t\t\tExpectativas del producto:
+       \t\t\t\t\t\tInterfaz intuitiva y fácil de usar.
+       \t\t\t\t\t\tFunciones de colaboración en tiempo real.
+       \t\t\t\t\t\tIntegración con otras herramientas comunes de productividad.
+       \t\t\t\tCita ficticia:
+       \t\t\t\t\t\t"Necesito una herramienta que no solo organice mis tareas, sino que también simplifique la comunicación y colaboración en equipo. Estoy ansioso por encontrar una solución que se adapte perfectamente a las demandas de mis proyectos y estudios."
+       \t\t\t\tCanales de comunicación:
+       \t\t\t\t\t\tLinkedIn para actualizaciones profesionales y recomendaciones.
+       \t\t\t\t\t\tGrupos de estudiantes en Facebook para discusiones informales.
+       \t\t\t\t\t\tCorreo electrónico para comunicaciones más formales y oportunidades de aprendizaje.
+       \t\t\t\tNotas adicionales:
+       \t\t\t\t\t\tJosé es un usuario tecnológicamente competente y está dispuesto a adoptar nuevas soluciones que mejoren su eficiencia y desempeño en la gestión de proyectos. Su experiencia laboral y académica lo hace consciente de la importancia de herramientas efectivas para enfrentar los desafíos cotidianos en su campo.
 
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      Solo una raíz,siempre deja como titulo el "User Persona", respeta las jerarquias: Demografía,Datos de trabajo,Desafíos y necesidades, Objetivos y deseos, Comportamiento de compra, Comportamiento en línea, Frustraciones actuales, Expectativas del producto, Cita ficticia, Canales de comunicación y Notas adicionales  , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,7 +288,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Genera un User persona teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt + "Respeta la estructura"
         }
       ],
       stream: true,
@@ -326,6 +345,16 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         try {
           const parsed = JSON.parse(message);
           let result = parsed.choices[0].delta.content || "";
+
+          <Typewriter
+          onInit={(typewriter) => {
+            typewriter.typeString(result)
+            .pauseFor(2500)
+            .start();
+          }
+        }
+
+        />
 
           // Agregue cada línea a la cadena de resultados
           if (

@@ -6,6 +6,7 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export const login = async (data) => {
   try {
+    console.log(`${URL_link}/login`)
     const response = await axios.post(`${URL_link}/login`, {
       email: data.email,
       password: data.password
@@ -30,4 +31,8 @@ export const registerUser = async (data) => {
   } catch (error) {
     return error.response
   }
+}
+
+export const logout = async() => {
+  const response = await axios.get(`${URL_link}/adios`)
 }

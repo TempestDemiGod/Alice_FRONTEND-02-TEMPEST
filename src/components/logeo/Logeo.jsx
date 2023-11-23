@@ -30,9 +30,7 @@ export const Logeo = ()=>{
         const data = {
             email,
             password
-        }
-        const res = await login(data)
-        console.log(res)
+        } 
       };
     
     return(
@@ -49,7 +47,7 @@ export const Logeo = ()=>{
             </div>
             {mostrarMenu ? <LoginMain /> : <RegistroMain/> }
             <br/>
-            {mostrarMenu ? <span>Si no tienes tienes una cuenta       <a onClick={logeo}>Registrate</a></span>: <span>Si tienes tienes una cuenta       <a onClick={logeo}>Iniciar Sesion</a></span>}
+            {mostrarMenu ? <span className='text-cambio'>Si no tienes tienes una cuenta       <a className='punto-cambio' onClick={logeo}>Registrate</a></span>: <span className='text-cambio'>Si tienes tienes una cuenta       <a className='punto-cambio' onClick={logeo}>Iniciar Sesion</a></span>}
         </div>
     </div>
 

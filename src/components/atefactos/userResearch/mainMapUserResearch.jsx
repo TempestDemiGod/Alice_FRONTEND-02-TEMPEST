@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Mermaid from "../../../utils/Mermaid";
 import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
 // import { listado } from "../../utils/proyects";
+import Typewriter from 'typewriter-effect';
+
 
 let idProject
 let apikey
@@ -25,10 +27,10 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
 
   return (
     <div className="App">
-      <div className="outer">
-        <div>
-          <div className="title-map-box">Prompt de entrada</div>
-          <div className="textarea">
+      <div className="outer parametros-textos">
+        <div className="text-extendido-textos">
+          <div>Prompt de entrada</div>
+          <div className="textarea text-extendido salida-extendido-textos">
             <textarea
               id="prompt"
               name="prompt"
@@ -37,9 +39,9 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div>
-          <div className="title-map-box">Salida</div>
-          <div className="textarea">
+        <div className="text-extendido-textos">
+          <div>Salida</div>
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -47,8 +49,8 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
+      <button className="btn form-control btn btn-outline-dark mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+      {/* <Mermaid key={result ? result.length : 0} chart={result} /> */}
     </div>
   );
 }
@@ -108,8 +110,8 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="password"
           id="token"
-          name="token"
           className="form-control bg-dark text-white mb-3"
+          name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -145,8 +147,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          id="temperature"
           className="form-control bg-dark text-white mb-3"
+          id="temperature"
           name="temperature"
           value={temperature}
           onChange={handleTemperatureChange}
@@ -168,7 +170,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -189,7 +191,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -202,7 +204,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'User Research'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -220,32 +222,20 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
-\t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
-
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      `Cree un user Research  basado en las aportaciones del usuario como estos ejemplos:
+      \tTema: Asistente Virtual en la gestion de proyectos
+      \t\t\tDefinición de Objetivos
+      \t\t\t\tQueremos entender a fondo las necesidades y desafíos específicos que enfrentan los profesionales de la gestión de proyectos en su día a día. Además, buscamos validar la viabilidad y aceptación de un asistente virtual diseñado para mejorar la eficiencia y la efectividad en la gestión de proyectos.
+      \t\t\tElección de Métodos
+      \t\t\t\tOptaremos por una combinación de entrevistas y pruebas de usabilidad. Las entrevistas nos permitirán obtener percepciones cualitativas profundas sobre las experiencias, desafíos y expectativas de los usuarios. Las pruebas de usabilidad nos darán información práctica sobre la facilidad de uso y la eficacia del asistente virtual en situaciones simuladas.
+      \t\t\tRecopilación de Datos
+      \t\t\t\tRealizaremos entrevistas individuales con profesionales de la gestión de proyectos, abordando preguntas específicas sobre sus métodos actuales, desafíos comunes y posibles mejoras. También implementaremos pruebas de usabilidad, solicitando a los participantes que realicen tareas representativas utilizando el asistente virtual.
+      \t\t\tAnálisis de Datos
+      \t\t\t\tLos datos recopilados se analizarán para identificar patrones en las respuestas de los usuarios, destacando las áreas de mayor interés y las posibles mejoras necesarias en el diseño del asistente virtual. Buscaremos tendencias en términos de preferencias de funcionalidades y aspectos de usabilidad.
+      \t\t\tPresentación de Resultados
+      \t\t\t\tLos resultados se presentarán de manera clara y accesible a los equipos de desarrollo, marketing y ventas. Se proporcionarán recomendaciones basadas en los hallazgos, resaltando las oportunidades de mejora y destacando las características del asistente virtual que han recibido una respuesta positiva por parte de los usuarios.
+      
+      Solo una raíz de tema y pon el titulo User Research, respeta la jerarquia: Definición de Objetivos,Elección de Métodos,Recopilación de Datos,Análisis de Datos y Presentación de Resultados , ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,7 +259,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Genera un User Research teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt
         }
       ],
       stream: true,
@@ -326,6 +316,17 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         try {
           const parsed = JSON.parse(message);
           let result = parsed.choices[0].delta.content || "";
+
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter.typeString(result)
+              .pauseFor(2500)
+              .start();
+            }
+          }
+
+          />
+
 
           // Agregue cada línea a la cadena de resultados
           if (

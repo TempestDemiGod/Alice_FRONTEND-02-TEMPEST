@@ -101,7 +101,7 @@ export const Home = () => {
               </button>
             </nav>
             <div className="main-contenido">
-              {Inicio ? <HomeProject api={IdProject} tema={TemaProyecto} nombre={NombreProyecto} id={ApiProject}/> : <InicioInfo cambiarEstado={() => cambiarInicio(false)} />}
+              {Inicio ? <HomeProject api={IdProject} tema={TemaProyecto} nombre={NombreProyecto} id={ApiProject} cambiarEstado={() => cambiarInicio(false)}/> : <InicioInfo cambiarEstado={() => cambiarInicio(false)} />}
             </div>
             <div className="line"></div>
           </div>

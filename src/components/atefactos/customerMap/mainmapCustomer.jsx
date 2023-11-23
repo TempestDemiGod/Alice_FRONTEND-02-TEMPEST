@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Mermaid from "../../../utils/Mermaid";
 import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
-// import { listado } from "../../utils/proyects";
+import "../../mapasEquilibrados/brainstorming.css";
 
 let idProject
 let apikey
@@ -22,6 +22,53 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
+  // const getTema = async () => {
+  //   try {
+  //     const tema = await listado();
+  //     setProyecto(tema.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+    
+  //   getTema();
+
+  // }, []);
+
+
+  // const [nombre, setNombre] = useState('')
+  // const [prompts, setPrompts] = useState('')
+  // const [respuesta, setRespuesta] = useState('')
+
+  // const handleNombre = (e) => {
+  //   setNombre(e.target.value)
+  //   console.log(nombre);
+  // }
+
+  // const handlePrompts = (e) => {
+  // setPrompts(e.target.value)
+  // console.log(prompts);
+  // }
+
+  // const handleRespuesta = (e) => {
+  //     setRespuesta(e.target.value)
+  //     console.log(respuesta);
+  // }
+
+  // const onSubmit = async (e) => {
+  //     e.preventDefault();
+  //     const data = {
+  //         nombre,
+  //         prompts,
+  //         respuesta,
+          
+  //     }
+  //     const res = await registerArtifact(data)
+  //     console.log(data)
+  //     console.log(res)
+  //   };
 
   return (
     <div className="App">
@@ -106,10 +153,10 @@ console.log('funciono chamo .. ' + idProject)
       <div>OpenAI API_KEY</div>
       <div>
         <input
+          className="form-control bg-dark text-white mb-3"
           type="password"
           id="token"
           name="token"
-          className="form-control bg-dark text-white mb-3"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -117,9 +164,9 @@ console.log('funciono chamo .. ' + idProject)
       <div>
         <label htmlFor="model">Motor GPT:</label>
         <select
+          className="form-control bg-dark text-white mb-3"
           name="model"
           id="model"
-          className="form-control bg-dark text-white mb-3"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -145,8 +192,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          id="temperature"
           className="form-control bg-dark text-white mb-3"
+          id="temperature"
           name="temperature"
           value={temperature}
           onChange={handleTemperatureChange}
@@ -168,7 +215,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -202,7 +249,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'Customer Journey Map'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -221,31 +268,54 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
       `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
-\t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
+journey map
+journey
+\t\t\t\t\ttitle Asista a una conferencia tecnológica
+\t\t\t\t\tsection Pre-Conferencia
+\t\t\t\t\t\t\tCompra una Entrada: 4: Asistentes, Punto de Venta
+\t\t\t\t\t\t\Consultar Horario antes de la Conferencia: 6: Asistentes, Sitio
+\t\t\t\t\t\t\tDesarrollo de prototipos: 4: Me, Cat
+\t\t\t\t\tsection Mañana
+\t\t\t\t\t\t\tRegistro en la Conferencia: 5: Asistentes, Voluntarios
+\t\t\t\t\t\t\tConsultar horario en la conferencia: 4: asistentes, aplicación móvil
+\t\t\t\t\t\t\tAsistir a la Charla: 5: Asistentes, Oradores, Voluntarios
+\t\t\t\t\tsection tarde 
+\t\t\t\t\t\t\t Almuerzo: 3: Asistentes, Voluntarios
+\t\t\t\t\t\t\t"Pasillo de pasillo": 5: Asistentes, Voluntarios
+\t\t\t\t\t\t\tPelícula posterior a la conferencia: 12: asistentes, voluntarios, orador
+text summary journey:
+journey
+\t\t\t\t\ttitle Realización de un proyecto binefico
+\t\t\t\t\tsection Intercambio de Bienes: 
+\t\t\t\t\t\t\tPrepara y ofrecer un bien: 2: dias
+\t\t\t\t\t\t\tIndicar especffcacnnes del blen: 4: dias
+\t\t\t\t\t\t\tBuscar bien de Interes: 5 : dias
+\t\t\t\t\t\t\tLeer y observar detalles del ben: 3: dias
+\t\t\t\t\t\t\tProponer oferta de Intercambio: 2: dias
+\t\t\t\t\t\t\tConfirmar Intercambio: 1: dias
+\t\t\t\t\t\t\tCoordinar entrega de bien: 2: dias
+\t\t\t\t\t\t\tElegir método de pago: 4: dias
+\t\t\t\t\t\t\tHacer Intercambio de bienes: 2: dias
+\t\t\t\t\tsection Envio de paquetes
+\t\t\t\t\t\t\tPreparar el paquete: 2: dias
+\t\t\t\t\t\t\tHacer cola para envio: 6: dias
+\t\t\t\t\t\t\tEspecificar datos del remitente: 2: dias
+\t\t\t\t\t\t\tEspecificar datos de envto: 1: dias
+\t\t\t\t\t\t\tElegir método de pago: 2: dias
+\t\t\t\t\t\t\tRealizar pago: 1: dias
+\t\t\t\t\t\t\tEntregar paquete: 5: dias
+\t\t\t\t\t\t\tRecibir comprobante: 2: dias
+\t\t\t\t\t\t\tRecibir fecha de entrega: 3: dias
+\t\t\t\t\tsection Recepcion de paquetes
+\t\t\t\t\t\t\tEntrar a la plataforma de envio: 2: dias
+\t\t\t\t\t\t\tHacer seguimiento del paquete: 2: dias
+\t\t\t\t\t\t\tEsperar llegada del paquete: 1: dias
+\t\t\t\t\t\t\tRecibil el paquete: 2: dias
+\t\t\t\t\t\t\tComprobar estado del bien: 1: dias
+\t\t\t\t\t\t\tConfirmar la entrega del paquete: 2: dias
 
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+
+Solo una raíz, deja la palabra journey como encabezado y respeta la jerarquia title y section, ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,7 +339,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Genera una lista de actividades que den solucion al problema con las estimaciones no mayor de 7 dias del tema:" + prompt
         }
       ],
       stream: true,
@@ -370,7 +440,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+        <button className="tab-button btn btn-outline-success"  onClick={() => guardarMapa()}>guardar mapa</button>
         <button
           className="tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}

@@ -13,19 +13,19 @@ mermaid.initialize({
   theme: "default",
   securityLevel: "loose",
   fontFamily: "Helvetica Neue",
-  fontColor: "white",
+  fontColor: "black",
   themeCSS: `
   text, tspan {
-    fill: #fff !important;
+    fill: black !important;
   }
 
   .fa {
-    color: white;
+    color: black;
   }
 
   rect.node-bkg, circle.node-bkg, .node-bkg.node-no-border {
-    fill: #2c3e50 ;
-    stroke: #2c3e50;
+    fill: #83EBBF ;
+    stroke: #91EB83;
   }
 
 
@@ -38,11 +38,11 @@ mermaid.initialize({
   }
 
   path.edge {
-    stroke: #2c3e50 !important;
+    stroke: #orange !important;
   }
 
   [class^="node-line-"] {
-    stroke: #2c3e50 !important;
+    stroke: #BCEB83 !important;
   }
 
   .fa.icon-container {
@@ -199,9 +199,9 @@ export default class Mermaid extends React.Component {
   render() {
     return (
       <>
-        <div className="buttonContainer">
-          <button onClick={() => this.saveAsPNG()}>Guardar Formato PNG</button>
-          <button onClick={() => this.saveAsSVG()}>Guardar Formato SVG </button>
+        <div className="buttonContainer d-flex justify-content-center mt-4">
+          <button className="mx-2 btn btn-outline-success" onClick={() => this.saveAsPNG()}>Guardar Formato PNG</button>
+          <button className="mx-2 btn btn-outline-success" onClick={() => this.saveAsSVG()}>Guardar Formato SVG </button>
         </div>
         <div id="mermaidChart" className="mermaid">
           {this.props.chart}

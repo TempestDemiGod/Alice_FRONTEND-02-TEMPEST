@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Mermaid from "../../utils/Mermaid";
-import { listadoProject, registerArtifact } from '../../utils/artifact';
+import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
 import { listado } from "../../utils/proyects";
 
 let idProject
 let apikey
 let temaproyecto
+let respuestaObtenida
+let respuestaArtefactoID
 async function verProyecto(){
   const data = {
     idProject
@@ -72,7 +74,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
     <div className="App">
       <div className="outer">
         <div>
-          <div>Prompt de entrada</div>
+          <div className="title-map-box">Prompt de entrada</div>
           <div className="textarea">
             <textarea
               id="prompt"
@@ -83,7 +85,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
         <div>
-          <div>Salida</div>
+          <div className="title-map-box">Salida</div>
           <div className="textarea">
             <textarea
               value={result}
@@ -92,7 +94,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button onClick={() => callOpenAi()}>Generar Artefacto</button>
+      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
       <Mermaid key={result ? result.length : 0} chart={result} />
     </div>
   );
@@ -153,6 +155,7 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="password"
           id="token"
+          className="form-control bg-dark text-white mb-3"
           name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
@@ -163,6 +166,7 @@ console.log('funciono chamo .. ' + idProject)
         <select
           name="model"
           id="model"
+          className="form-control bg-dark text-white mb-3"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -176,6 +180,7 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="maxTokens">Max de Tokens a usar:</label>
         <input
           type="text"
+          className="form-control bg-dark text-white mb-3"
           id="maxTokens"
           name="maxTokens"
           value={maxTokens}
@@ -187,6 +192,7 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
+          className="form-control bg-dark text-white mb-3"
           id="temperature"
           name="temperature"
           value={temperature}
@@ -198,6 +204,7 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
+          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
           name="promptTemplate"
           value={promptTemplate}
@@ -208,17 +215,20 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function Mapa({id,tema,api}) {
+export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
     apikey= api
     temaproyecto = tema
+    respuestaObtenida = respuestaDB
+    respuestaArtefactoID  = ArtecatoDB
     // verProyecto()
     setToken(apikey)
   },[]);
   useEffect(() => {
     setPrompt(temaproyecto)
+    setResult(respuestaObtenida)
   },[]);
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
@@ -240,15 +250,16 @@ export default function Mapa({id,tema,api}) {
     let prompt = promptGlobal
     let id = idProject
     let nombre = 'brainstorming'
+    let idArtefacto = respuestaArtefactoID 
+    console.log('idArtefacto')
+    console.log(idArtefacto)
     const data = {
-      id,
-      nombre,
-      prompt,
+      idArtefacto,
       respuesta
   }
-  const result = await registerArtifact(data)
+  console.log(data)
+  const result = await UpDateArtifact(data)
     console.log(result)
-    console.log(data.prompt)
   }
   const [temperature, setTemperature] = useState(
     localStorage.getItem("temperature") || 0.7
@@ -257,7 +268,6 @@ export default function Mapa({id,tema,api}) {
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
       `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-brainstorming mindmap
 mindmap
 \t\troot(("leisure activities weekend"))
 \t\t\t\t["spend time with friends"]
@@ -310,7 +320,7 @@ mindmap
 \t\t\t\t::icon(fa fa-ban)
 \t\t\t\t\t\t("Tenant has to look for a new apartment")
 \t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz, use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -331,6 +341,10 @@ Solo una raíz, use íconos gratuitos de FontAwesome, y seguir los tipos de nodo
         {
           role: "user",
           content: prompt  
+        },
+        {
+          role: "assistant",
+          content: "Realiza sugerencias innovadoras para dar solución al tema planteado:" + prompt
         }
       ],
       stream: true,
@@ -431,14 +445,14 @@ Solo una raíz, use íconos gratuitos de FontAwesome, y seguir los tipos de nodo
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button" onClick={() => guardarMapa()}>guardar mapa</button>
+        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
         <button
-          className="tab-button"
+          className="tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
         >
           Artefacto
         </button>
-        <button className="tab-button" onClick={() => setActiveTab("Settings")}>
+        <button className="tab-button btn btn-outline-primary" onClick={() => setActiveTab("Settings")}>
           Configuración
         </button>
       </div>

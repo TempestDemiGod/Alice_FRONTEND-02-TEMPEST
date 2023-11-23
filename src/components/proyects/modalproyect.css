@@ -1,0 +1,11 @@
+.error{
+    display: block;
+    color: tomato;
+    font-size: x-small;
+}
+#buttons-form{
+    border-top: 1px solid #42424242;
+    padding-top: 2vh;
+    display: flex;
+    justify-content: end;
+}

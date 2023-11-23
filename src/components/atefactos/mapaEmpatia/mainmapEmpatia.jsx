@@ -22,6 +22,53 @@ async function verProyecto(){
   console.log(proyecto.data.tema)
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
+  // const getTema = async () => {
+  //   try {
+  //     const tema = await listado();
+  //     setProyecto(tema.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+    
+  //   getTema();
+
+  // }, []);
+
+
+  // const [nombre, setNombre] = useState('')
+  // const [prompts, setPrompts] = useState('')
+  // const [respuesta, setRespuesta] = useState('')
+
+  // const handleNombre = (e) => {
+  //   setNombre(e.target.value)
+  //   console.log(nombre);
+  // }
+
+  // const handlePrompts = (e) => {
+  // setPrompts(e.target.value)
+  // console.log(prompts);
+  // }
+
+  // const handleRespuesta = (e) => {
+  //     setRespuesta(e.target.value)
+  //     console.log(respuesta);
+  // }
+
+  // const onSubmit = async (e) => {
+  //     e.preventDefault();
+  //     const data = {
+  //         nombre,
+  //         prompts,
+  //         respuesta,
+          
+  //     }
+  //     const res = await registerArtifact(data)
+  //     console.log(data)
+  //     console.log(res)
+  //   };
 
   return (
     <div className="App">
@@ -79,6 +126,8 @@ function SettingsTab({
     }
   };
 console.log('funciono chamo .. ' + idProject)
+console.log('funciono chamo .. ' + respuestaArtefactoID )
+
   function extractFloatFromString(str) {
     str = str.replace(',', '.'); // Reemplazar coma con punto como separador decimal
     const result = str.match(/^-?(\d+)?(\.\d*)?/); // Une dígitos opcionales antes y después del punto decimal
@@ -108,8 +157,8 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="password"
           id="token"
-          name="token"
           className="form-control bg-dark text-white mb-3"
+          name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -133,8 +182,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="maxTokens">Max de Tokens a usar:</label>
         <input
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="maxTokens"
+          className="form-control bg-dark text-white mb-3"
           name="maxTokens"
           value={maxTokens}
           onChange={handleMaxTokensChange}
@@ -157,8 +206,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
+          className="form-control bg-dark text-white mb-3"
           name="promptTemplate"
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
@@ -168,7 +217,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaEmpatia({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -178,6 +227,8 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
     respuestaArtefactoID  = ArtecatoDB
     // verProyecto()
     setToken(apikey)
+    console.log('respuestaArtefactoID')
+    console.log(respuestaArtefactoID)
   },[]);
   useEffect(() => {
     setPrompt(temaproyecto)
@@ -202,7 +253,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'Mapa de Empatia'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -220,32 +271,35 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
+      `Cree un mapa mental  basado en las aportaciones del usuario como estos ejemplos:
 mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
+\t\t\troot((Asistente virtual para la gestión de proyectos de innovación))
 \t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
-
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+\t\t\t\tPersona o segmento de usuario que interviene con el problema?
+\t\t\t\t\tEmprendedores y equipos de proyectos innovadores.
+\t\t\t\t\t\tStartups en fase inicial.
+\t\t\t\t\t\tEquipos de innovación en empresas establecidas.
+\t\t\t\tLo que ven?
+\t\t\t\t\tInterfaz intuitiva y amigable.
+\t\t\t\t\t\tVisualización clara del progreso del proyecto.
+\t\t\t\t\t\tHerramientas de colaboración y comunicación integradas.
+\t\t\t\tLo que escuchan o oyen?
+\t\t\t\t\tNecesidad de funciones personalizables según el tipo de proyecto.
+\t\t\t\t\t\tRetroalimentación sobre la eficacia de las sugerencias del asistente.
+\t\t\t\t\t\tSolicitudes de integración con otras herramientas de gestión.
+\t\t\t\tLo que sugieren los usuarios?
+\t\t\t\t\tMayor capacidad predictiva del asistente.
+\t\t\t\t\t\tMejoras en la adaptabilidad a diferentes industrias.
+\t\t\t\t\t\tRetroalimentación en tiempo real sobre el rendimiento del equipo.
+\t\t\t\tLos esfuerzos que se sugiere para afrontar el tema
+\t\t\t\t\tInvestigación continua de tecnologías emergentes.
+\t\t\t\t\t\tColaboración con expertos en gestión de proyectos.
+\t\t\t\t\t\tImplementación de actualizaciones frecuentes basadas en retroalimentación.
+\t\t\t\tLos resultados que deseamos obtener
+\t\t\t\t\tAumento en la eficiencia y productividad de los proyectos.
+\t\t\t\t\t\tReducción de errores y retrabajo.
+\t\t\t\t\t\tMayor satisfacción y retención de usuarios.
+Solo una raíz, deja a "mindmap" como encabezado, evita poner "mermaid" en la estructura y manten los nodos: Persona o segmento de usuario que interviene con el problema?, Lo que ven?, Lo que escuchan o oyen?, Lo que sugieren los usuarios?, Los esfuerzos que se sugiere para afrontar el tema y Los resultados que deseamos obtener. Evitar los tipos de nodos "[", " "-" "mermaid"( "," "-" . No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,8 +323,9 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Realiza un mapa de empatia del tema:" + prompt
         }
+
       ],
       stream: true,
       max_tokens: maxTokens,

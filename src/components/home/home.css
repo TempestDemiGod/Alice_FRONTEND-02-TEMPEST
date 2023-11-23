@@ -31,6 +31,9 @@
     position: relative;
     z-index: 2;
 }
+.title-map-box{
+    height: max-content;
+}
 .main-contenido{
     width: 86vw;
     overflow-x: hidden;
@@ -134,12 +137,12 @@
 /* media querys */
 @media screen and (max-width: 1200px){
     .menu-projects{
-        width: 8vw;
-        background-color: rgb(46, 230, 104);
+        width: 8rem;
+        /* background-color: rgb(46, 230, 104); */
     }
     .main-contenido{
         width: 92vw;
-        background-color: red;
+        /* background-color: red; */
     }
     .logo-home{
         width: 90%;
@@ -154,7 +157,18 @@
         background-color: rgb(255, 255, 255);
         position: absolute;
         z-index: 1;
-        margin-left: 3.8vw;
+        margin-left: 3.4rem;
+    }
+    .projectButton{
+        font-size: .8rem;
+    }
+    .btn-addProject{
+        font-size: .6rem;
     }
 }
 
+@media screen and (max-width: 991.4px){
+    .title-map-box{
+        height: 12vh;
+    }
+}

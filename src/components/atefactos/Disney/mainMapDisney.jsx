@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Mermaid from "../../../utils/Mermaid";
 import { UpDateArtifact, listadoProject, registerArtifact } from '../../../utils/artifact';
 // import { listado } from "../../utils/proyects";
+import Typewriter from 'typewriter-effect';
+
 
 let idProject
 let apikey
@@ -25,10 +27,10 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
 
   return (
     <div className="App">
-      <div className="outer">
-        <div>
-          <div className="title-map-box">Prompt de entrada</div>
-          <div className="textarea">
+      <div className="outer parametros-textos ">
+        <div className="text-extendido-textos">
+          <div>Prompt de entrada</div>
+          <div className="textarea text-extendido salida-extendido-textos">
             <textarea
               id="prompt"
               name="prompt"
@@ -37,9 +39,9 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div>
-          <div className="title-map-box">Salida</div>
-          <div className="textarea">
+        <div className="text-extendido-textos">
+          <div>Salida</div>
+          <div className="textarea text-extendido ">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -47,8 +49,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
-      <Mermaid key={result ? result.length : 0} chart={result} />
+      <button className="btn form-control btn btn-outline-dark mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
     </div>
   );
 }
@@ -106,10 +107,10 @@ console.log('funciono chamo .. ' + idProject)
       <div>OpenAI API_KEY</div>
       <div>
         <input
+          className="form-control bg-dark text-white mb-3"
           type="password"
           id="token"
           name="token"
-          className="form-control bg-dark text-white mb-3"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -118,8 +119,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="model">Motor GPT:</label>
         <select
           name="model"
-          id="model"
           className="form-control bg-dark text-white mb-3"
+          id="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
         >
@@ -145,8 +146,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="temperature">Temperatura:</label>
         <input
           type="text"
-          id="temperature"
           className="form-control bg-dark text-white mb-3"
+          id="temperature"
           name="temperature"
           value={temperature}
           onChange={handleTemperatureChange}
@@ -168,7 +169,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -189,7 +190,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -202,7 +203,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'Mapa de walt disney'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -220,32 +221,23 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
 
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
-      `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
-\t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
+      `Cree un diagrama de Walt Disney basado en las aportaciones del usuario como estos ejemplos:
+       Método Walt Disney: 'Asistente virtual para la gestion de proyectos de innovación'
+       \t\tFase del Soñador:
+       \t\t\t\t\t\tLa visión más audaz para nuestro proyecto es transformar la forma en que se gestionan los proyectos de innovación mediante la creación de un asistente virtual altamente inteligente. Imaginemos un futuro donde la inteligencia artificial guía y potencia la creatividad de los equipos, acelerando el proceso de innovación de manera sorprendente.
+       \t\t\t\t\t\tEn un escenario ideal sin restricciones, nuestro asistente virtual sería capaz de comprender y generar ideas innovadoras, gestionar automáticamente los recursos necesarios, y adaptarse de manera proactiva a los cambios en el entorno. Además, facilitaría la colaboración entre equipos de manera fluida, independientemente de su ubicación geográfica.
+       \t\t\t\t\t\tEl éxito absoluto se reflejaría en la transformación radical de la eficiencia y la efectividad en la gestión de proyectos de innovación. Nuestro asistente virtual sería reconocido como un catalizador clave para el desarrollo de ideas revolucionarias, llevando a la empresa a la vanguardia de la innovación global.
+       \t\tFase del Realista:
+       \t\t\t\t\t\tPara implementar las ideas generadas, debemos comenzar por desarrollar un prototipo funcional del asistente virtual. Seleccionaríamos un equipo multidisciplinario, asignaríamos roles y estableceríamos un cronograma detallado para el desarrollo iterativo del prototipo.
+       \t\t\t\t\t\tNecesitamos recursos técnicos como desarrolladores de inteligencia artificial, programadores, y expertos en aprendizaje automático. Además, se requieren recursos financieros para la investigación y desarrollo. La disponibilidad de estos recursos dependerá de las alianzas estratégicas y la inversión que podamos asegurar.
+       \t\t\t\t\t\tLos pasos prácticos incluyen el desarrollo incremental del asistente, pruebas continuas con usuarios reales, y ajustes basados en retroalimentación. Además, debemos establecer alianzas con empresas de tecnología para acceder a recursos avanzados y garantizar la seguridad y ética en el uso de la inteligencia artificial.
+       \t\tFase del Crítico:
+       \t\t\t\t\t\tPosibles obstáculos podrían incluir la resistencia al cambio por parte de los equipos, problemas éticos relacionados con la inteligencia artificial, y desafíos regulatorios. La identificación y mitigación proactiva de estos obstáculos será crucial.
+       \t\t\t\t\t\tEs posible que algunos aspectos del plan inicial, como la velocidad de adopción por parte de los equipos, no sean tan eficientes como se espera. Se deben realizar evaluaciones periódicas y ajustar el plan según sea necesario para garantizar la eficiencia continua.
+       \t\t\t\t\t\tPara optimizar la viabilidad y el éxito, podríamos mejorar la interfaz del asistente para hacerla más intuitiva, proporcionar formación continua a los usuarios, y realizar actualizaciones regulares basadas en el feedback. Además, la colaboración con expertos en ética de la inteligencia artificial podría mejorar la aceptación y confianza en el sistema.
+      
 
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+      Solo una raíz, deja Método Walt Disney y agrega el tema como encabezado ,ademas sigue las tres fases: Fase del Soñador(abarca la visión del proyecto, elementos claves de un escenario  como se lograria el exito del proyecto), Fase del Realista(abarca que podemomos implementar para las ideas generadas en la fase de el soñador,los recursos que se necesitan) y Fase del Crítico (cuales son los posibles obstaculos que se pueden dar  y ajustes y mejoras que se pueden dar durante el desarrollo del tema).`
   );
   
 
@@ -269,7 +261,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Me gustaria que des respuesta a las tres fase: Fase del Soñador, Fase del Realista y Fase del Crítico del Metodo Walt Disney y respeta la estructura segun el tema :" + prompt
         }
       ],
       stream: true,
@@ -320,12 +312,24 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
             console.log(result);
             return result;
           });*/
+
           return;
         }
 
         try {
           const parsed = JSON.parse(message);
           let result = parsed.choices[0].delta.content || "";
+          
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter
+              .typeString(result)
+              .pauseFor(2500)
+              .start();
+            }
+          }
+
+          />
 
           // Agregue cada línea a la cadena de resultados
           if (

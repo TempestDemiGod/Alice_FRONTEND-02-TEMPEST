@@ -1,8 +1,24 @@
+.contenedor-registro{
+    height: 64%;
+    overflow-y: scroll;
+}
+.contenedor-registro::-webkit-scrollbar{
+    width: .2em;
+    opacity: 0.3;
+}
+.contenedor-registro::-webkit-scrollbar-track{
+    background: rgb(244, 244, 245);
+    
+}
+.contenedor-registro::-webkit-scrollbar-thumb{
+    background-color: #e7af06;
+    border-radius: 4rem;
+}
 @media screen and (max-height: 710px){
     .hola-02{
-        width: 80%;
-        padding: 0 2%;
-        height: 76%;
+        width: 100%;
+        padding: 0 6%;
+        height: 100%;
         overflow-x: hidden;
         overflow-y: scroll ;
     }
@@ -18,9 +34,20 @@
         background-color: #efe1b8;
         border-radius: 4rem;
     }
+    .contenedor-registro{
+        height: 64%;
+        overflow-y: scroll;
+    }
 }
 @media screen and (max-height: 480px){
     .hola-02{
         height: 50%;
     }
+    
+}
+
+.error{
+    display: block;
+    color: tomato;
+    font-size: x-small;
 }

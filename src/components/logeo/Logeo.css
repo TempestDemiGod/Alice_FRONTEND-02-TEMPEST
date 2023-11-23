@@ -54,6 +54,15 @@
     height: 100vh;
     border-radius: 2vw 0 0 2vw;
 }
+.punto-cambio{
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(230, 92, 46);
+    font-weight: bold;
+}
+.text-cambio{
+    width: max-content;
+}
 .btn-logeo{
     margin-top: 2vw;
     color: white;
@@ -63,11 +72,14 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border: none;
     box-sizing: border-box;
-    border-radius: .6vw;
-    width: 14vw;
-    height: 2.3vw;
-    font-size: 1.4vw;
+    border-radius: .6rem;
+    padding: .5rem 1.4rem;
+    width: max-content;
+    font-size: 1rem;
     transition: background-color, ease 2s;
+}
+.btn-logeo:hover{
+    background-color: rgb(80, 227, 232);
 }
 span{
     display: block;
@@ -97,6 +109,10 @@ span{
     .logo-login img{
         width: 100%;
     }
+    .btn-logeo{
+        border-radius: .6vw;
+        padding: .5rem 1.4rem;
+    }
     .contenedor{
         align-items: center;
         justify-content: center;
@@ -112,7 +128,6 @@ span{
         box-shadow: 0 0 60px rgb(74, 211, 188);
     }
 }
-
 @media screen and (max-height: 600px){
     span{
         transform: translatey(-4vh);

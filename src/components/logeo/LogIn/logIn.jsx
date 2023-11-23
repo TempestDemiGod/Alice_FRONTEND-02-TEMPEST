@@ -3,12 +3,30 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import "./login.css";
+import {Link} from 'react-router-dom'
 import { login } from "../../../utils/auth";
-
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 export const LoginMain = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    function showMessage(message,type){
+      Toastify({
+        text: message,
+        duration: 3000,
+        // destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background:type === 'success' ?"linear-gradient(to right, #00b09b, #96c93d)": 'red'
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
+    }
+    
     const handleEmail = (e) => {
         setEmail(e.target.value)
         console.log(email);
@@ -21,12 +39,23 @@ export const LoginMain = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = {
+        try{
+          const data = {
             email,
             password
         }
         const res = await login(data)
         console.log(res)
+        if(res.status == 200 ){
+          window.location.href = "/Home";
+        }else{
+          throw true;
+        }
+        }catch(error){
+          showMessage('Credenciales de Usuario Incorrectas','error')
+          
+        }
+        
       };
   return (
     <>
@@ -51,10 +80,10 @@ export const LoginMain = () => {
           <Form.Control onChange={(e) => handlePassword(e)} type="password" placeholder="Password" />
          </Col>
       </Form.Group>
-      <button className="btn-logeo" type='submit' onClick={(e) => onSubmit(e)}> Ingresar</button>
+      <button className="btn-logeo" type='submit' onClick={(e) => onSubmit(e)}>Ingresar</button>
      </Form>
      </section>
-    </>
+     </>
   );
 };
 

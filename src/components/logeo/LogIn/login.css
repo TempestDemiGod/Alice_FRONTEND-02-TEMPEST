@@ -1,6 +1,8 @@
 .contenedor-form{
-    width: 40vw;
+    width: 100%;
+    padding: 0 6%;
     margin: 0 auto;
+    height: 50%;
 }
 .hola-01{
     text-align: center;

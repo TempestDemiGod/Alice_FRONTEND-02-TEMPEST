@@ -10,9 +10,10 @@
     width:  100%;
 }
 .title-nav{
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     width: max-content;
     margin: 0 auto;
+    margin-bottom: 4vh;
     color: white;
 }
 .offcanvas{
@@ -37,6 +38,13 @@
     height: 8vw;
     transform: translate(50%,50%);
     background-color: rgb(230, 92, 46);
+}
+.name-project{
+    color: rgb(230, 92, 46);
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: .2vw;
+
 }
 .circle-mid{
     position: absolute;
@@ -122,4 +130,34 @@
     transform: translate(-34%,50%);
     background-color: rgb(230, 92, 46);
 }
-
+.option-nav:hover{
+    text-shadow:
+    1px 1px 10px rgb(255, 255, 255),
+    0 0 4em rgb(255, 140, 0),
+    0 0 0.8em rgb(0, 255, 191);
+}
+.option-nav .option-line01{
+    position: fixed;
+    height: 8px;
+    width: 18rem;
+    right: 0;
+    border-radius: 1rem 0 0 1rem;
+    transform: translateY(-1rem);
+    background-color: rgb(255, 255, 255);
+    clip-path: circle(2% at right center);
+    transition: clip-path .4s ease;
+}
+.option-nav .option-line02{
+    position: fixed;
+    height: 8px;
+    width: 14rem;
+    right: 0;
+    border-radius: 1rem 0 0 1rem;
+    transform: translateY(-1rem);
+    background-color: rgb(255, 255, 255);
+    clip-path: circle(2% at right center);
+    transition: clip-path .4s ease;
+}
+.option-nav:hover .option-line01,.option-nav:hover .option-line02{
+    clip-path: circle(100%)
+}

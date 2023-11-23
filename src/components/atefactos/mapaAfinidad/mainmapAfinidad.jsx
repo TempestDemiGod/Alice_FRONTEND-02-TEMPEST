@@ -108,8 +108,8 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="password"
           id="token"
-          name="token"
           className="form-control bg-dark text-white mb-3"
+          name="token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
         />
@@ -133,8 +133,8 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="maxTokens">Max de Tokens a usar:</label>
         <input
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="maxTokens"
+          className="form-control bg-dark text-white mb-3"
           name="maxTokens"
           value={maxTokens}
           onChange={handleMaxTokensChange}
@@ -146,8 +146,8 @@ console.log('funciono chamo .. ' + idProject)
         <input
           type="text"
           id="temperature"
-          className="form-control bg-dark text-white mb-3"
           name="temperature"
+          className="form-control bg-dark text-white mb-3"
           value={temperature}
           onChange={handleTemperatureChange}
         />
@@ -157,9 +157,9 @@ console.log('funciono chamo .. ' + idProject)
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
-          className="form-control bg-dark text-white mb-3"
           id="promptTemplate"
           name="promptTemplate"
+          className="form-control bg-dark text-white mb-3"
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
         />
@@ -168,7 +168,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaAfinidad({id,tema,api,respuestaDB,ArtecatoDB}) {
   
   useEffect(() => {
     idProject = id
@@ -202,7 +202,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   async function guardarMapa(){
     let prompt = promptGlobal
     let id = idProject
-    let nombre = 'Mapa de imapcto'
+    let nombre = 'Mapa de Afinidad'
     let idArtefacto = respuestaArtefactoID 
     console.log('idArtefacto')
     console.log(idArtefacto)
@@ -222,30 +222,55 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
     localStorage.getItem("promptTemplate") ||
       `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
 mindmap
-\t\t\troot((Asistente virtual para la gestión de proyectos de innovacion))
-\t\t\t::icon(fa fa-book)
-\t\t\t\tInteresado 1: Emprendedores y equipos de proyectos innovadores
-\t\t\t\t\tImpacto: Aumento en la eficiencia y velocidad de ejecución de proyectos de innovación.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tDesarrollo de funciones personalizadas para adaptarse a la diversidad de proyectos.
-\t\t\t\t\t\t\tImplementación de herramientas de colaboración para mejorar la comunicación en equipos dispersos.
-\t\t\t\tInteresado 2: Startups en fase inicial
-\t\t\t\t\tImpacto: Mejora en la capacidad de tomar decisiones informadas y estratégicas.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración de tecnologías avanzadas para proporcionar análisis predictivos.
-\t\t\t\t\t\t\tDiseño de una interfaz intuitiva que facilite la toma de decisiones rápidas.
-\t\t\t\tInteresado 3: Equipos de innovación en empresas establecidas
-\t\t\t\t\tImpacto: Optimización de la gestión de recursos y aumento en la productividad.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tIntegración con otras herramientas de gestión utilizadas en la empresa.
-\t\t\t\t\t\t\tImplementación de funciones de retroalimentación en tiempo real para mejorar la eficacia del equipo.
-\t\t\t\tInteresado 4: Expertos en gestión de proyectos
-\t\t\t\t\tImpacto: Contribución a la mejora continua y la evolución del asistente.
-\t\t\t\t\t\tEntregables:
-\t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
-\t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
-
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+\t\t\troot((Asistente virtual para la gestión de proyectos de innovación))
+\t\t\t\tIdea de solución 1:Integración de Tecnologías Avanzadas
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tExplorar la incorporación de inteligencia artificial y aprendizaje automático.
+\t\t\t\t\t\t\tInvestigar la viabilidad de la integración de reconocimiento de voz y procesamiento de lenguaje natural.
+\t\t\t\tIdea de solución 2:Personalización y Adaptabilidad
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tDesarrollar funciones personalizables según las necesidades específicas del proyecto.
+\t\t\t\t\t\t\tImplementar capacidades de adaptación a diferentes industrias y contextos.
+\t\t\t\tIdea de solución 3: Colaboración y Comunicación Efectiva
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tDiseñar herramientas de colaboración integradas para equipos dispersos.
+\t\t\t\t\t\t\tMejorar las funciones de comunicación, notificaciones y actualizaciones en tiempo real.
+\t\t\t\tIdea de solución 4: Evaluación Continua y Retroalimentación del Usuario
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tEstablecer un sistema de retroalimentación en tiempo real para evaluar la eficacia del asistente.
+\t\t\t\t\t\t\tImplementar encuestas periódicas y análisis de uso para recopilar comentarios de los usuarios.
+\t\t\t\tIdea de solución 5: Integración con Otras Herramientas de Gestión
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tInvestigar y establecer integraciones con plataformas de gestión de proyectos existentes.
+\t\t\t\t\t\t\tPermitir una transición fluida de datos entre el asistente y otras herramientas utilizadas por los usuarios.
+\t\t\t\tIdea de solución 6: Capacitación Continua del Asistente
+\t\t\t\t\tAcciones para solucionar el problema
+\t\t\t\t\t\t\tImplementar un sistema de aprendizaje continuo para mejorar la capacidad predictiva.
+\t\t\t\t\t\t\tDesarrollar algoritmos que se adapten y evolucionen con base en la experiencia y los cambios en el entorno del proyecto.
+mindmap
+\troot("Landlord sells apartment")
+\t\t::icon(fa fa-sell)
+\t\t("Renter must be notified of sale")
+\t\t::icon(fa fa-envelope)
+\t\t\t("Tenants may feel some uncertainty")
+\t\t\t::icon(fa fa-question-circle)
+\t\t("Notice periods must be observed")
+\t\t::icon(fa fa-calendar)
+\t\t\t("Landlord can submit notice of termination for personal use")
+\t\t\t::icon(fa fa-home)
+\t\t\t\t("Tenant has to look for a new apartment")
+\t\t\t\t::icon(fa fa-search)
+\t\t("New owner")
+\t\t::icon(fa fa-user)
+\t\t\t\t("New owner takes over existing rental agreement")
+\t\t\t\t::icon(fa fa-file-contract)
+\t\t\t\t\t\t("Tenant keeps previous apartment")
+\t\t\t\t\t\t::icon(fa fa-handshake)
+\t\t\t\t("New owner terminates newly concluded lease")
+\t\t\t\t::icon(fa fa-ban)
+\t\t\t\t\t\t("Tenant has to look for a new apartment")
+\t\t\t\t\t\t::icon(fa fa-search)
+Solo una raíz, deja la palabra mindmap como encabezado ,ademas sigue la estructura de idea de solucción y acciones para solucionanrlo, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,7 +294,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Me gustaria que representes al menos 6 ideas desarrollar soluciones al problemas mencionado:" + prompt +"luego, generar una lista con las acciones que pueden llevar a solucionar el problema"
         }
       ],
       stream: true,
@@ -370,7 +395,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+        <button className="tab-button btn btn-outline-success"  onClick={() => guardarMapa()}>guardar mapa</button>
         <button
           className="tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
