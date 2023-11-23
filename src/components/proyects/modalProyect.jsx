@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { registerProject } from '../../utils/proyects';
 import { useForm } from "react-hook-form";
 import { registerArtifact } from '../../utils/artifact';
-import './modalProyect.css'
+import './modalproyect.css'
 export const ModalProyect = ({estado , cambiarEstado})=>{ 
   if(!estado) return ''
 

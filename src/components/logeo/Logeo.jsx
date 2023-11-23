@@ -5,7 +5,7 @@ import { useState } from 'react';
 import image from "../../assets/imgMain.png";
 import imgAlice from "../../assets/Alice.png";
 import { LoginMain } from './LogIn/logIn';
-import { RegistroMain } from './signUp/signUp';
+import { RegistroMain } from './SignUp/signUp';
 
 export const Logeo = ()=>{
     const [mostrarMenu, setMostrarMenu] = useState(true)
