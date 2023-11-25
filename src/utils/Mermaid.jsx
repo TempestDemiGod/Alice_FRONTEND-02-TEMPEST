@@ -14,42 +14,42 @@ mermaid.initialize({
   securityLevel: "loose",
   fontFamily: "Helvetica Neue",
   fontColor: "black",
-  themeCSS: `
-  text, tspan {
-    fill: black !important;
-  }
+//   themeCSS: `
+//   text, tspan {
+//     fill: black !important;
+//   }
 
-  .fa {
-    color: black;
-  }
+//   .fa {
+//     color: black;
+//   }
 
-  rect.node-bkg, circle.node-bkg, .node-bkg.node-no-border {
-    fill: #83EBBF ;
-    stroke: #91EB83;
-  }
+//   rect.node-bkg, circle.node-bkg, .node-bkg.node-no-border {
+//     fill: #83EBBF ;
+//     stroke: #91EB83;
+//   }
 
 
-  .node-circle {
-    stroke-width: 2px !important;
-  }
+//   .node-circle {
+//     stroke-width: 2px !important;
+//   }
 
-  .node-no-border {
-    stroke-width: 0 !important;
-  }
+//   .node-no-border {
+//     stroke-width: 0 !important;
+//   }
 
-  path.edge {
-    stroke: #orange !important;
-  }
+//   path.edge {
+//     stroke: #orange !important;
+//   }
 
-  [class^="node-line-"] {
-    stroke: #BCEB83 !important;
-  }
+//   [class^="node-line-"] {
+//     stroke: #BCEB83 !important;
+//   }
 
-  .fa.icon-container {
-    color: inherit !important;
-    font-size: inherit !important;
-  }
-`
+//   .fa.icon-container {
+//     color: inherit !important;
+//     font-size: inherit !important;
+//   }
+// `
 });
 
 async function replaceFontAwesomeIconsWithInlineSVGs(mermaidContainer) {

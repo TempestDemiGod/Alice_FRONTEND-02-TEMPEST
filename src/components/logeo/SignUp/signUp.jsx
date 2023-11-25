@@ -215,6 +215,11 @@ export const RegistroMain = () => {
           minLength: {
             value: 6,
             message: "Contraseña debe ser mayor a 6 caracteres",
+          }, 
+          maxLength: {
+            value: 12,
+            message: "Contraseña no debe tener mas de 12 caracteres",
+            
           },
           pattern: {
             value: RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),

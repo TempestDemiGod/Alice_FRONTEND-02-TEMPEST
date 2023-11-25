@@ -4,9 +4,10 @@ import "./brainstorming.css";
 import Mapa from "./mainmappTab.jsx";
 import { useLocation } from "react-router-dom";
 import MenuMain from "../navbar/Navbar.jsx";
+
 export const Brainstorming = () => {
   const location = useLocation();
-    
+  
   console.log(location.state);
   let apikey  = location.state.api
   let tema  = location.state.tema

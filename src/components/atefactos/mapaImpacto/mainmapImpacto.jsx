@@ -8,6 +8,24 @@ let apikey
 let temaproyecto
 let respuestaObtenida
 let respuestaArtefactoID
+
+function showMessage(message,type){
+  Toastify({
+    text: message,
+    duration: 3000,
+    // destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background:type === 'success' ?"linear-gradient(to right, #00b09b, #96c93d)": 'red'
+    },
+    onClick: function(){} // Callback after click
+}).showToast();
+}
+
 async function verProyecto(){
   const data = {
     idProject
@@ -189,7 +207,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -212,7 +230,9 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   }
   console.log(data)
   const result = await UpDateArtifact(data)
-    console.log(result)
+  if(result.status == 202){
+    showMessage(`El artefacto ${nombre} se guardo con Exito`,'success')
+  }
   }
   const [temperature, setTemperature] = useState(
     localStorage.getItem("temperature") || 0.7
@@ -245,7 +265,7 @@ mindmap
 \t\t\t\t\t\t\tEstablecimiento de un sistema de retroalimentación periódica para evaluar la eficacia del asistente.
 \t\t\t\t\t\t\tDesarrollo de capacidades de aprendizaje continuo para mantenerse actualizado con las mejores prácticas de gestión de proyectos.
 
-Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la estructura de interesado, impacto y entregable, y evitar los tipos de nodos "[", ""-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en la estructura ,ademas sigue la jerarquia de interesado, impacto y entregable, y evitar los tipos de nodos "[",","-"(",""-". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -269,7 +289,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el problema, mencionado:" + prompt +"luego, generar una lista con el imapcto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema."
+          content: "Me gustaria que representes al menos 4 interesados en resolver el te, mencionado:" + prompt +"luego, generar una lista con el impacto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema con ideas tecnologicas"
         }
       ],
       stream: true,

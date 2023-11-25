@@ -128,7 +128,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                   pattern: {
                     // RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
                     value: RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
-                    message: "La contraseña no puede iniciar con espacios",
+                    message: "El Nombre no puede iniciar con espacios",
                   },
                 })}
                 
@@ -138,7 +138,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                 <span className='error'>Nombre debe ser mayor a 10 caracteres</span>
               )} 
               {errors.nombre?.type === "pattern" && (
-                <span className='error'>Nombre no iniciar con espacios</span>
+                <span className='error'>Nombre no debe iniciar con espacios</span>
             )}  
             </Form.Group>
 
@@ -146,7 +146,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
               <Form.Label>Tema</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Sea prciso con el tema, ya que se usara como prompt"
+                placeholder="Sea preciso con el tema, ya que se usara como prompt"
                 autoFocus
                 {...register("tema", { 
                   required: {
@@ -160,7 +160,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                   pattern: {
                     // RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
                     value: RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
-                    message: "La contraseña no puede iniciar con espacios",
+                    message: "El Tema no puede iniciar con espacios",
                   },
                 })}
               />
@@ -169,7 +169,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                 <span className='error'>Tema debe ser mayor a 10 caracteres</span>
               )}  
                {errors.tema?.type === "pattern" && (
-                <span className='error'>Tema no iniciar con espacios</span>
+                <span className='error'>Tema no debe iniciar con espacios</span>
             )}  
 
             </Form.Group>

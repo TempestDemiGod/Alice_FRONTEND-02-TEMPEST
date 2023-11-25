@@ -61,7 +61,7 @@
     font-weight: bold;
 }
 .text-cambio{
-    width: max-content;
+    max-width: max-content;
 }
 .btn-logeo{
     margin-top: 2vw;
@@ -126,6 +126,10 @@ span{
         height: 90vh;
         border-radius: 2vw 2vw 2vw 2vw;
         box-shadow: 0 0 60px rgb(74, 211, 188);
+    }
+    .text-cambio{
+        margin-top: 1rem;
+        max-width: 80%;
     }
 }
 @media screen and (max-height: 600px){

@@ -10,6 +10,24 @@ let apikey
 let temaproyecto
 let respuestaObtenida
 let respuestaArtefactoID
+
+function showMessage(message,type){
+  Toastify({
+    text: message,
+    duration: 3000,
+    // destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background:type === 'success' ?"linear-gradient(to right, #00b09b, #96c93d)": 'red'
+    },
+    onClick: function(){} // Callback after click
+}).showToast();
+}
+
 async function verProyecto(){
   const data = {
     idProject
@@ -260,7 +278,9 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   }
   console.log(data)
   const result = await UpDateArtifact(data)
-    console.log(result)
+  if(result.status == 202){
+    showMessage(`El artefacto ${nombre} se guardo con Exito`,'success')
+  }
   }
   const [temperature, setTemperature] = useState(
     localStorage.getItem("temperature") || 0.7

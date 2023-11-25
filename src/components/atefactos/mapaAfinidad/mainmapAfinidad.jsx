@@ -8,6 +8,24 @@ let apikey
 let temaproyecto
 let respuestaObtenida
 let respuestaArtefactoID
+
+function showMessage(message,type){
+  Toastify({
+    text: message,
+    duration: 3000,
+    // destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background:type === 'success' ?"linear-gradient(to right, #00b09b, #96c93d)": 'red'
+    },
+    onClick: function(){} // Callback after click
+}).showToast();
+}
+
 async function verProyecto(){
   const data = {
     idProject
@@ -212,7 +230,9 @@ export default function MapaAfinidad({id,tema,api,respuestaDB,ArtecatoDB}) {
   }
   console.log(data)
   const result = await UpDateArtifact(data)
-    console.log(result)
+  if(result.status == 202){
+    showMessage(`El artefacto ${nombre} se guardo con Exito`,'success')
+  }
   }
   const [temperature, setTemperature] = useState(
     localStorage.getItem("temperature") || 0.7
@@ -247,30 +267,8 @@ mindmap
 \t\t\t\t\tAcciones para solucionar el problema
 \t\t\t\t\t\t\tImplementar un sistema de aprendizaje continuo para mejorar la capacidad predictiva.
 \t\t\t\t\t\t\tDesarrollar algoritmos que se adapten y evolucionen con base en la experiencia y los cambios en el entorno del proyecto.
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz, deja la palabra mindmap como encabezado ,ademas sigue la estructura de idea de solucción y acciones para solucionanrlo, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+
+Solo una raíz, deja la palabra "mindmap" como encabezado seguido por root ,ademas sigue la estructura de idea de solucción y acciones para solucionanrlo, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 

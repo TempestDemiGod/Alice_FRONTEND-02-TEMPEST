@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Mermaid from "../../utils/Mermaid";
 import { UpDateArtifact, listadoProject, registerArtifact } from '../../utils/artifact';
 import { listado } from "../../utils/proyects";
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 let idProject
 let apikey
@@ -20,6 +22,22 @@ async function verProyecto(){
   temaproyecto = proyecto.data.tema
   console.log(proyecto.data.apiKey)
   console.log(proyecto.data.tema)
+}
+function showMessage(message,type){
+  Toastify({
+    text: message,
+    duration: 3000,
+    // destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background:type === 'success' ?"linear-gradient(to right, #00b09b, #96c93d)": 'red'
+    },
+    onClick: function(){} // Callback after click
+}).showToast();
 }
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
   // const getTema = async () => {
@@ -238,6 +256,7 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [maxTokens, setMaxTokens] = useState(
     localStorage.getItem("maxTokens") || 2000
   );
+
   let respuesta = result
   let promptGlobal
   if(prompt == '' ){
@@ -257,9 +276,10 @@ export default function Mapa({id,tema,api,respuestaDB,ArtecatoDB}) {
       idArtefacto,
       respuesta
   }
-  console.log(data)
   const result = await UpDateArtifact(data)
-    console.log(result)
+  if(result.status == 202){
+    showMessage(`El artefacto ${nombre} se guardo con Exito`,'success')
+  }
   }
   const [temperature, setTemperature] = useState(
     localStorage.getItem("temperature") || 0.7
@@ -284,43 +304,8 @@ mindmap
 \t\t\t\t\t\t("\`take a sunbath ☀️\`")
 \t\t\t\t\t\t("reading a book")
 \t\t\t\t\t\t::icon(fa fa-book)
-text summary mindmap:
-mindmap
-\troot("Barack Obama")
-\t\t("Born August 4, 1961")
-\t\t::icon(fa fa-baby-carriage)
-\t\t("American Politician")
-\t\t\t::icon(fa fa-flag)
-\t\t\t\t("44th President of the United States")
-\t\t\t\t\t("2009 - 2017")
-\t\t("Democratic Party")
-\t\t\t::icon(fa fa-democrat)
-\t\t("First African-American President")
-cause and effects mindmap:
-mindmap
-\troot("Landlord sells apartment")
-\t\t::icon(fa fa-sell)
-\t\t("Renter must be notified of sale")
-\t\t::icon(fa fa-envelope)
-\t\t\t("Tenants may feel some uncertainty")
-\t\t\t::icon(fa fa-question-circle)
-\t\t("Notice periods must be observed")
-\t\t::icon(fa fa-calendar)
-\t\t\t("Landlord can submit notice of termination for personal use")
-\t\t\t::icon(fa fa-home)
-\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t::icon(fa fa-search)
-\t\t("New owner")
-\t\t::icon(fa fa-user)
-\t\t\t\t("New owner takes over existing rental agreement")
-\t\t\t\t::icon(fa fa-file-contract)
-\t\t\t\t\t\t("Tenant keeps previous apartment")
-\t\t\t\t\t\t::icon(fa fa-handshake)
-\t\t\t\t("New owner terminates newly concluded lease")
-\t\t\t\t::icon(fa fa-ban)
-\t\t\t\t\t\t("Tenant has to look for a new apartment")
-\t\t\t\t\t\t::icon(fa fa-search)
-Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+
+Solo una raíz ,deja como titulo: "mindmap" y seguidos por el root, use íconos gratuitos de FontAwesome, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -344,7 +329,7 @@ Solo una raíz,deja como titulo: "mindmap", use íconos gratuitos de FontAwesome
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras para dar solución al tema planteado:" + prompt
+          content: "Realiza sugerencias innovadoras en base a tecnologias para dar solución o mejorar el tema planteado:" + prompt
         }
       ],
       stream: true,

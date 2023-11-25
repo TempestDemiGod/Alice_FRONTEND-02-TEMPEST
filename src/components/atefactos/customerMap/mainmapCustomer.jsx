@@ -8,6 +8,24 @@ let apikey
 let temaproyecto
 let respuestaObtenida
 let respuestaArtefactoID
+
+function showMessage(message,type){
+  Toastify({
+    text: message,
+    duration: 3000,
+    // destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background:type === 'success' ?"linear-gradient(to right, #00b09b, #96c93d)": 'red'
+    },
+    onClick: function(){} // Callback after click
+}).showToast();
+}
+
 async function verProyecto(){
   const data = {
     idProject
@@ -259,7 +277,9 @@ export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB}) {
   }
   console.log(data)
   const result = await UpDateArtifact(data)
-    console.log(result)
+  if(result.status == 202){
+    showMessage(`El artefacto ${nombre} se guardo con Exito`,'success')
+  }
   }
   const [temperature, setTemperature] = useState(
     localStorage.getItem("temperature") || 0.7
@@ -268,54 +288,38 @@ export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [promptTemplate, setPromptTemplate] = useState(
     localStorage.getItem("promptTemplate") ||
       `Cree un mapa mental de mermaid basado en las aportaciones del usuario como estos ejemplos:
-journey map
-journey
-\t\t\t\t\ttitle Asista a una conferencia tecnológica
-\t\t\t\t\tsection Pre-Conferencia
-\t\t\t\t\t\t\tCompra una Entrada: 4: Asistentes, Punto de Venta
-\t\t\t\t\t\t\Consultar Horario antes de la Conferencia: 6: Asistentes, Sitio
-\t\t\t\t\t\t\tDesarrollo de prototipos: 4: Me, Cat
-\t\t\t\t\tsection Mañana
-\t\t\t\t\t\t\tRegistro en la Conferencia: 5: Asistentes, Voluntarios
-\t\t\t\t\t\t\tConsultar horario en la conferencia: 4: asistentes, aplicación móvil
-\t\t\t\t\t\t\tAsistir a la Charla: 5: Asistentes, Oradores, Voluntarios
-\t\t\t\t\tsection tarde 
-\t\t\t\t\t\t\t Almuerzo: 3: Asistentes, Voluntarios
-\t\t\t\t\t\t\t"Pasillo de pasillo": 5: Asistentes, Voluntarios
-\t\t\t\t\t\t\tPelícula posterior a la conferencia: 12: asistentes, voluntarios, orador
-text summary journey:
 journey
 \t\t\t\t\ttitle Realización de un proyecto binefico
 \t\t\t\t\tsection Intercambio de Bienes: 
-\t\t\t\t\t\t\tPrepara y ofrecer un bien: 2: dias
-\t\t\t\t\t\t\tIndicar especffcacnnes del blen: 4: dias
+\t\t\t\t\t\t\tPrepara y ofrecer un bien: 2 : dias
+\t\t\t\t\t\t\tIndicar especffcacnnes del blen: 4 : dias
 \t\t\t\t\t\t\tBuscar bien de Interes: 5 : dias
-\t\t\t\t\t\t\tLeer y observar detalles del ben: 3: dias
-\t\t\t\t\t\t\tProponer oferta de Intercambio: 2: dias
-\t\t\t\t\t\t\tConfirmar Intercambio: 1: dias
-\t\t\t\t\t\t\tCoordinar entrega de bien: 2: dias
-\t\t\t\t\t\t\tElegir método de pago: 4: dias
-\t\t\t\t\t\t\tHacer Intercambio de bienes: 2: dias
+\t\t\t\t\t\t\tLeer y observar detalles del ben: 3 : dias
+\t\t\t\t\t\t\tProponer oferta de Intercambio: 2 : dias
+\t\t\t\t\t\t\tConfirmar Intercambio: 1 : dias
+\t\t\t\t\t\t\tCoordinar entrega de bien: 2 : dias
+\t\t\t\t\t\t\tElegir método de pago: 4 : dias
+\t\t\t\t\t\t\tHacer Intercambio de bienes: 2 : dias
 \t\t\t\t\tsection Envio de paquetes
-\t\t\t\t\t\t\tPreparar el paquete: 2: dias
-\t\t\t\t\t\t\tHacer cola para envio: 6: dias
-\t\t\t\t\t\t\tEspecificar datos del remitente: 2: dias
-\t\t\t\t\t\t\tEspecificar datos de envto: 1: dias
-\t\t\t\t\t\t\tElegir método de pago: 2: dias
-\t\t\t\t\t\t\tRealizar pago: 1: dias
-\t\t\t\t\t\t\tEntregar paquete: 5: dias
-\t\t\t\t\t\t\tRecibir comprobante: 2: dias
-\t\t\t\t\t\t\tRecibir fecha de entrega: 3: dias
+\t\t\t\t\t\t\tPreparar el paquete: 2 : dias
+\t\t\t\t\t\t\tHacer cola para envio: 6 : dias
+\t\t\t\t\t\t\tEspecificar datos del remitente: 2 : dias
+\t\t\t\t\t\t\tEspecificar datos de envto: 1 : dias
+\t\t\t\t\t\t\tElegir método de pago: 2 : dias
+\t\t\t\t\t\t\tRealizar pago: 1 : dias
+\t\t\t\t\t\t\tEntregar paquete: 5 : dias
+\t\t\t\t\t\t\tRecibir comprobante: 2 : dias
+\t\t\t\t\t\t\tRecibir fecha de entrega: 3 : dias
 \t\t\t\t\tsection Recepcion de paquetes
-\t\t\t\t\t\t\tEntrar a la plataforma de envio: 2: dias
-\t\t\t\t\t\t\tHacer seguimiento del paquete: 2: dias
-\t\t\t\t\t\t\tEsperar llegada del paquete: 1: dias
-\t\t\t\t\t\t\tRecibil el paquete: 2: dias
-\t\t\t\t\t\t\tComprobar estado del bien: 1: dias
-\t\t\t\t\t\t\tConfirmar la entrega del paquete: 2: dias
+\t\t\t\t\t\t\tEntrar a la plataforma de envio: 2 : dias
+\t\t\t\t\t\t\tHacer seguimiento del paquete: 2 : dias
+\t\t\t\t\t\t\tEsperar llegada del paquete: 1 : dias
+\t\t\t\t\t\t\tRecibil el paquete: 2 : dias
+\t\t\t\t\t\t\tComprobar estado del bien: 1 : dias
+\t\t\t\t\t\t\tConfirmar la entrega del paquete: 2 : dias
 
 
-Solo una raíz, deja la palabra journey como encabezado y respeta la jerarquia title y section, ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+Solo una raíz, deja la palabra "journey" como encabezado y ademas despues de cada numero agregale ":" o andes de la palabra "dias" y respeta la jerarquia title y section. No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -339,7 +343,7 @@ Solo una raíz, deja la palabra journey como encabezado y respeta la jerarquia t
         },
         {
           role: "assistant",
-          content: "Genera una lista de actividades que den solucion al problema con las estimaciones no mayor de 7 dias del tema:" + prompt
+          content: "Genera una lista de actividades que den solucion al problema con las estimaciones no mayor de 7 dias del tema:" + prompt 
         }
       ],
       stream: true,
