@@ -127,7 +127,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                   },
                   pattern: {
                     // RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
-                    value: RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
+                    value: RegExp("^[a-zA-Z0-9_.+-@ñóíéáú]+[a-zA-Z0-9_.+-@ñóíéáú ]+$"),
                     message: "El Nombre no puede iniciar con espacios",
                   },
                 })}
@@ -159,7 +159,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                   },
                   pattern: {
                     // RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
-                    value: RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
+                    value: RegExp("^[a-zA-Z0-9_.+-@ñóíéáú]+[a-zA-Z0-9_.+-@ñóíéáú ]+$"),
                     message: "El Tema no puede iniciar con espacios",
                   },
                 })}
@@ -217,9 +217,26 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
               <Form.Label>Descripción</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Describe tu proyecto es opcional"
+                placeholder="Describe el problema de invetigación, se preciso y con pocas palabras"
                 autoFocus
+                {...register("description", {
+                  required: {
+                    value: true,
+                    message: "La descripción es requerida",
+                  },
+                  maxLength: {
+                    value: 150,
+                    message: "La descripción no debe ser mayor a 150 caracteres",
+                  },
+
+                })}
+
               />
+
+              {errors.description?.type === "required" && <span className='error'>Descripción requerida</span>}
+              {errors.description?.type === "maxLength" && (
+                <span className='error'>Descripción no debe ser mayor a 150 caracteres</span>
+              )}
             </Form.Group>
      
     
@@ -230,7 +247,7 @@ const listArtifacts = ['MapaEmpatia','CustomerJorneyMap','UserResearch','UserPer
                 <Button variant="primary" type="submit">
                 Agregar Proyecto
               </Button>
-          </div>
+          </div>  
           </Form>
         </Modal.Body>
       </Modal>

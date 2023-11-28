@@ -289,7 +289,7 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 4 interesados en resolver el te, mencionado:" + prompt +"luego, generar una lista con el impacto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema con ideas tecnologicas"
+          content: "Me gustaria que representes al menos 4 interesados en resolver el tema, mencionado:" + prompt +"luego, generar una lista con el impacto que tiene cada interesado y en base a ello genera entregables por cada impacto para solucionar el problema con ideas tecnologicas"
         }
       ],
       stream: true,

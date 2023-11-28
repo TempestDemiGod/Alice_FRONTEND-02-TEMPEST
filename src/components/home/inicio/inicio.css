@@ -5,8 +5,9 @@
    
 }
 
-.info-top-inicio p{
+.info-top-inicio .left-info{
     padding: 2em 2%;
+    margin-right: 6vw;
     width: 60%;
     text-align: justify;
 }

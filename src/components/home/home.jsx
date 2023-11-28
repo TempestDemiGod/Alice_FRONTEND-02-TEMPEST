@@ -25,6 +25,7 @@ export const Home = () => {
   const [ApiProject, cambiarApiProject] = useState();
   const [TemaProyecto, cambiarTemaProyecto] = useState();
   const [NombreProyecto, cambiarNombreProyecto] = useState();
+  const [DescripcionProyecto, cambiarDescripcionProyecto] = useState();
   console.log(IdProject)
 
 //   const obtenerProyecto = async() =>{
@@ -44,11 +45,13 @@ export const Home = () => {
     // console.log(e.target.id) 
     // console.log(proyectos[e.target.id]._id) 
     // await cambiarIdProject(proyectos[e.target.id]._id)
-    console.log('proyecto seleccionado .. ' +proyectos[e.target.id].tema)
+    console.log('proyecto seleccionado .. ' + proyectos[e.target.id].tema)
     cambiarIdProject(proyectos[e.target.id]._id)
     cambiarTemaProyecto(proyectos[e.target.id].tema)
     cambiarNombreProyecto(proyectos[e.target.id].nombre)
     cambiarApiProject(proyectos[e.target.id].apiKey)
+    cambiarDescripcionProyecto(proyectos[e.target.id].description)
+    console.log('proyecto seleccionado .. ' +proyectos[e.target.id].description)
     // await obtenerProyecto()
     await cambiarInicio(true)
   }
@@ -101,7 +104,7 @@ export const Home = () => {
               </button>
             </nav>
             <div className="main-contenido">
-              {Inicio ? <HomeProject api={IdProject} tema={TemaProyecto} nombre={NombreProyecto} id={ApiProject} cambiarEstado={() => cambiarInicio(false)}/> : <InicioInfo cambiarEstado={() => cambiarInicio(false)} />}
+              {Inicio ? <HomeProject api={IdProject} tema={TemaProyecto} nombre={NombreProyecto} id={ApiProject} description={DescripcionProyecto} cambiarEstado={() => cambiarInicio(false)}/> : <InicioInfo cambiarEstado={() => cambiarInicio(false)} />}
             </div>
             <div className="line"></div>
           </div>

@@ -233,7 +233,7 @@ console.log('funciono chamo .. ' + idProject)
   );
 }
 
-export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB}) {
+export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB,description}) {
   
   useEffect(() => {
     idProject = id
@@ -343,7 +343,7 @@ Solo una raíz, deja la palabra "journey" como encabezado y ademas despues de ca
         },
         {
           role: "assistant",
-          content: "Genera una lista de actividades que den solucion al problema con las estimaciones no mayor de 7 dias del tema:" + prompt 
+          content: "Genera una lista de actividades que den solucion al problema:" + description + " con las estimaciones no mayor de 7 dias del tema:" + prompt 
         }
       ],
       stream: true,

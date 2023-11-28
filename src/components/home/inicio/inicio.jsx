@@ -41,11 +41,13 @@ export const InicioInfo = () => {
 
    <div className="info-top-inicio mb-5">
          
-          <p>
+          <div className="left-info">
           <h2>Que nos impulso a crear ALICE? </h2>
+            <p>
             Alice es una aplicación la cual fue creada con el objetivo de que los usuarios puedan tener una trazabilidad coherente en sus
             proyectos de Innovacion, lo que permitira que puedan seguir los pasos necesarios en una secuencia logica que evite que se creen
             incoherencias en el proceso de gestacion del proyecto de Innovacion.
+            </p>
             <div className="Acordion sombra">
     <Accordion className="Acordion-02">
       <Accordion.Item className="Acordion-03" eventKey="0">
@@ -64,37 +66,41 @@ export const InicioInfo = () => {
       <Accordion.Item className="Acordion-03" eventKey="1">
         <Accordion.Header>Conoce mas sobre Lean StartUp</Accordion.Header>
         <Accordion.Body className="Acordion-03">
-        <iframe
+        {/* <iframe
             width="560"
             height="315"
             src="https://www.youtube.com/embed/l9ET1WqRvSQ?si=BPSscomRMzxGowOQ"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          ></iframe>
+          ></iframe> */}
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item className="Acordion-03" eventKey="2">
         <Accordion.Header>Entragables que puedes realizar con Alice</Accordion.Header>
-        <Accordion.Body className="Acordion-03"> 
+        <Accordion.Body className="Acordion-03">
+          <div>
         <p>
           En la presente web nos enfocamos en la fase de ideación del
           proyecto para ello se podra realizar los siguientes entregables:
         </p>
-        <ul> * Mapa de empatía</ul>
-        <ul> * Customer Journey map</ul>
-        <ul> * User Research</ul>
-        <ul> * User Persona</ul>
-        <ul> * Mapa de arquetipos</ul>
-        <ul> * Mapa de Afinidad</ul>
-        <ul> * Brainstorming</ul>
-        <ul> * Diagrama de Imagineria de Wall Disney</ul>
-        <ul> * Mapa de Impacto</ul>
+        <ul>
+          <li>Mapa de empatia</li>
+          <li>Customer Journey Map</li>
+          <li>User Research</li>
+          <li>User Persona</li>
+          <li>Tecnica de los 6 sombreros</li>
+          <li>Mapa de afinidad</li>
+          <li>BraingStorming</li>
+          <li>Diagrama de Walt Disney</li>
+          <li>Mapa de impacto</li>
+        </ul>
+        </div> 
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
 
     </div>
-          </p>
+          </div>
           
           <div className="sombra">
             <img src={brain} />

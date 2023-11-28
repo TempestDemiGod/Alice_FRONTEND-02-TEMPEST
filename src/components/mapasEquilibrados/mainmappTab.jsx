@@ -329,7 +329,7 @@ Solo una raíz ,deja como titulo: "mindmap" y seguidos por el root, use íconos 
         },
         {
           role: "assistant",
-          content: "Realiza sugerencias innovadoras en base a tecnologias para dar solución o mejorar el tema planteado:" + prompt
+          content: "Realiza sugerencias innovadoras en base a tecnologias para dar solución o mejorar el tema planteado:" + prompt + "Con innvación tecnologica."
         }
       ],
       stream: true,

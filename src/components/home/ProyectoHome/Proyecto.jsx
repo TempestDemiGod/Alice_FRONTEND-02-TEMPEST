@@ -12,7 +12,7 @@ import disney from '../../../assets/waltdisney.jpg'
 import impacto from '../../../assets/mapasimpacto.webp'
 import { listadoArtefactos, listadoProject } from '../../../utils/artifact';
 import { elimarProyecto } from '../../../utils/proyects';
-export const HomeProject = ({api,tema ,nombre,id, cambiarEstado}) =>{
+export const HomeProject = ({api,tema ,nombre,id, cambiarEstado,description}) =>{
     const temaproyecto = tema
     const NombreProyecto = nombre.toUpperCase()
     const [Artefactos, setArtefactos] = useState([]);
@@ -70,7 +70,7 @@ export const HomeProject = ({api,tema ,nombre,id, cambiarEstado}) =>{
             <Link type="button" to={`/empatia`} className="card btn btn-outline-primary" state={{api,tema,id,Artefactos}}>
             <img src={empatia} />
             Mapa de empatía</Link>
-            <Link type="button" to={`/customer`} className="card btn btn-outline-primary" state={{api,tema,id,Artefactos}}>
+            <Link type="button" to={`/customer`} className="card btn btn-outline-primary" state={{api,tema,id,Artefactos,description}}>
             <img src={customer} />
             Customer Journey map</Link>
             <Link to={`/User-Research`} type="button" className="card btn btn-outline-primary" state={{api,tema,id,Artefactos}}>

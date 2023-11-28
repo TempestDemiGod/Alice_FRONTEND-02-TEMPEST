@@ -10,6 +10,7 @@ export const Customer = () => {
   let apikey  = location.state.api
   let tema  = location.state.tema
   let id  = location.state.id
+  let descripcion = location.state.description
   let artefactos = location.state.Artefactos[1]
   let respuesta = artefactos.respuesta
   let ArtefactoID = artefactos._id
@@ -20,7 +21,7 @@ export const Customer = () => {
       <MenuMain />
       <div className="container">
       <h1 className="title-top">CUSTOMER JOURNEY MAP</h1>
-      <MapaCustomer id={apikey} tema={tema} api={id}  respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
+      <MapaCustomer id={apikey} tema={tema} api={id}  respuestaDB={respuesta} ArtecatoDB={ArtefactoID} description={descripcion}/>
     </div>
     </div>
      

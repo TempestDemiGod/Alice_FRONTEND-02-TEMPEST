@@ -8,6 +8,7 @@ import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
 
 export const RegistroMain = () => {
+  const [registroActual,setregistroActual] = useState(false)
 
   function showMessage(message,type){
     Toastify({
@@ -35,10 +36,12 @@ export const RegistroMain = () => {
   const forms = handleSubmit(async(data) => {
     console.log(data);
     try{ 
+      setregistroActual(true)
       const res = await registerUser(data)
       console.log(data)
       console.log(res)
       if(res.status == 201 ){
+        setregistroActual(false)
           window.location.href = "/Home";
       }else{
         throw true;
@@ -120,7 +123,7 @@ export const RegistroMain = () => {
             
           },
             pattern: {
-              value: RegExp("^[a-zA-Z]+[a-zA-Z ]+$"),
+              value: RegExp("^[a-zA-Zñóíéáú]+[a-zA-Zñóíéáú ]+$"),
               message: "El nombre no puede ser numerico o iniciar con espacios",
             },
 
@@ -160,7 +163,7 @@ export const RegistroMain = () => {
               message: "Apellido no debe ser mayor a 20 caracteres",
             },
             pattern: {
-              value: RegExp("^[a-zA-Z]+[a-zA-Z ]+$"),
+              value: RegExp("^[a-zA-Zñóíéáú]+[a-zA-Zñóíéáú ]+$"),
               message: "El Apellido no puede ser numerico",
             },
             
@@ -222,7 +225,7 @@ export const RegistroMain = () => {
             
           },
           pattern: {
-            value: RegExp("^[a-zA-Z0-9_.+-@ñ]+[a-zA-Z0-9_.+-@ñ ]+$"),
+            value: RegExp("^[a-zA-Zñóíéáú0-9_.+-@ñ]+[a-zA-Zñóíéáú0-9_.+-@ñ ]+$"),
             message: "La contraseña no puede iniciar con espacios",
           },
 
@@ -234,7 +237,7 @@ export const RegistroMain = () => {
         
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" disabled={registroActual} type="submit">
         Registrate
       </Button>
     </Form>

@@ -259,16 +259,8 @@ mindmap
 \t\t\t\t\tAcciones para solucionar el problema
 \t\t\t\t\t\t\tEstablecer un sistema de retroalimentación en tiempo real para evaluar la eficacia del asistente.
 \t\t\t\t\t\t\tImplementar encuestas periódicas y análisis de uso para recopilar comentarios de los usuarios.
-\t\t\t\tIdea de solución 5: Integración con Otras Herramientas de Gestión
-\t\t\t\t\tAcciones para solucionar el problema
-\t\t\t\t\t\t\tInvestigar y establecer integraciones con plataformas de gestión de proyectos existentes.
-\t\t\t\t\t\t\tPermitir una transición fluida de datos entre el asistente y otras herramientas utilizadas por los usuarios.
-\t\t\t\tIdea de solución 6: Capacitación Continua del Asistente
-\t\t\t\t\tAcciones para solucionar el problema
-\t\t\t\t\t\t\tImplementar un sistema de aprendizaje continuo para mejorar la capacidad predictiva.
-\t\t\t\t\t\t\tDesarrollar algoritmos que se adapten y evolucionen con base en la experiencia y los cambios en el entorno del proyecto.
 
-Solo una raíz, deja la palabra "mindmap" como encabezado seguido por root ,ademas sigue la estructura de idea de solucción y acciones para solucionanrlo, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+Solo una raíz, deja la palabra "mindmap" como encabezado seguido por root ,ademas sigue la jerarquia de idea de solucción y acciones para solucionanrlo, y seguir los tipos de nodos "[", "(". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -292,7 +284,7 @@ Solo una raíz, deja la palabra "mindmap" como encabezado seguido por root ,adem
         },
         {
           role: "assistant",
-          content: "Me gustaria que representes al menos 6 ideas desarrollar soluciones al problemas mencionado:" + prompt +"luego, generar una lista con las acciones que pueden llevar a solucionar el problema"
+          content: "Me gustaria que representes al menos 6 ideas desarrollar soluciones en base a tecnologias del tema mencionado:" + prompt +"luego, generar una lista con las acciones que pueden llevar a solucionar el problema"
         }
       ],
       stream: true,

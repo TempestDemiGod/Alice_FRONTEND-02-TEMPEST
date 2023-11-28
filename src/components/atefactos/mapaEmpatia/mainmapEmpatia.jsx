@@ -319,7 +319,7 @@ mindmap
 \t\t\t\t\tAumento en la eficiencia y productividad de los proyectos.
 \t\t\t\t\t\tReducción de errores y retrabajo.
 \t\t\t\t\t\tMayor satisfacción y retención de usuarios.
-Solo una raíz, deja a "mindmap" como encabezado, evita poner "mermaid" en la estructura y manten los nodos: Persona o segmento de usuario que interviene con el problema?, Lo que ven?, Lo que escuchan o oyen?, Lo que sugieren los usuarios?, Los esfuerzos que se sugiere para afrontar el tema y Los resultados que deseamos obtener. Evitar los tipos de nodos "[", " "-" "mermaid"( "," "-" . No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+Solo una raíz, deja a "mindmap" como encabezado, evita poner "mermaid" en la estructura y manten la estrutura: Persona o segmento de usuario que interviene con el problema?, Lo que ven?, Lo que escuchan o oyen?, Lo que sugieren los usuarios?, Los esfuerzos que se sugiere para afrontar el tema y Los resultados que deseamos obtener. Evitar los tipos de nodos "[", " "-" "mermaid"( "," "-" . No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
   
 
@@ -343,7 +343,7 @@ Solo una raíz, deja a "mindmap" como encabezado, evita poner "mermaid" en la es
         },
         {
           role: "assistant",
-          content: "Realiza un mapa de empatia basandose en el uso de la tecnologia, para indagar en el tema :" + prompt
+          content: "Realiza un mapa de empatia basandose en el uso de la tecnologia,siguiendo la  estrutura: Persona o segmento de usuario que interviene con el problema?, Lo que ven?, Lo que escuchan o oyen?, Lo que sugieren los usuarios?, Los esfuerzos que se sugiere para afrontar el tema y Los resultados que deseamos obtener, para indagar en el tema :" + prompt
         }
 
       ],
