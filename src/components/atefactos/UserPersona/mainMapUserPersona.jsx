@@ -207,7 +207,7 @@ export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [result, setResult] = useState("");
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
-  const [model, setModel] = useState("gpt-3.5-turbo");
+  const [model, setModel] = useState("gpt-3.5-turbo-16k");
   const [maxTokens, setMaxTokens] = useState(
     localStorage.getItem("maxTokens") || 3000
   );
@@ -253,7 +253,6 @@ export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
        \t\t\t\tDatos de trabajo:
        \t\t\t\t\t\tOcupación: Estudiante de Ingeniería de Sistemas
        \t\t\t\t\t\tEmpresa: Proyectos Innovadores SAC (pasante)
-       \t\t\t\t\t\tNivel de experiencia: Prácticas profesionales en gestión de proyectos
        \t\t\t\tDesafíos y necesidades:
        \t\t\t\t\t\tDesafío: Coordinar eficientemente tareas y plazos en proyectos complejos.
        \t\t\t\t\t\tNecesidad: Una herramienta que simplifique la gestión de proyectos y mejore la colaboración en equipos distribuidos.
@@ -261,28 +260,24 @@ export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
        \t\t\t\t\t\tObjetivo Profesional: Destacar en su pasantía y obtener habilidades sólidas en la gestión de proyectos.
        \t\t\t\t\t\tDeseo Personal: Lograr un equilibrio entre el trabajo y los estudios sin comprometer la calidad de su desempeño.
        \t\t\t\tComportamiento de compra:
-       \t\t\t\t\t\tInvestiga en blogs y redes sociales sobre herramientas de gestión de proyectos.
        \t\t\t\t\t\tPrefiere probar versiones gratuitas antes de comprometerse a comprar.
        \t\t\t\t\t\tValora la opinión de otros estudiantes y profesionales en su red.
        \t\t\t\tComportamiento en línea:
-       \t\t\t\t\t\tActivo en LinkedIn para networking y búsqueda de oportunidades laborales.
        \t\t\t\t\t\tParticipa en grupos de estudiantes de ingeniería en Facebook.
        \t\t\t\t\t\tLee blogs de tecnología y gestión de proyectos.
        \t\t\t\tFrustraciones actuales:
        \t\t\t\t\t\tDificultad para coordinar reuniones efectivas con compañeros de proyecto.
        \t\t\t\t\t\tPérdida de información importante debido a la falta de centralización en las herramientas utilizadas.
        \t\t\t\tExpectativas del producto:
-       \t\t\t\t\t\tInterfaz intuitiva y fácil de usar.
        \t\t\t\t\t\tFunciones de colaboración en tiempo real.
        \t\t\t\t\t\tIntegración con otras herramientas comunes de productividad.
        \t\t\t\tCita ficticia:
        \t\t\t\t\t\t"Necesito una herramienta que no solo organice mis tareas, sino que también simplifique la comunicación y colaboración en equipo. Estoy ansioso por encontrar una solución que se adapte perfectamente a las demandas de mis proyectos y estudios."
        \t\t\t\tCanales de comunicación:
-       \t\t\t\t\t\tLinkedIn para actualizaciones profesionales y recomendaciones.
        \t\t\t\t\t\tGrupos de estudiantes en Facebook para discusiones informales.
        \t\t\t\t\t\tCorreo electrónico para comunicaciones más formales y oportunidades de aprendizaje.
        \t\t\t\tNotas adicionales:
-       \t\t\t\t\t\tJosé es un usuario tecnológicamente competente y está dispuesto a adoptar nuevas soluciones que mejoren su eficiencia y desempeño en la gestión de proyectos. Su experiencia laboral y académica lo hace consciente de la importancia de herramientas efectivas para enfrentar los desafíos cotidianos en su campo.
+       \t\t\t\t\t\tJosé es un usuario tecnológicamente competente y está dispuesto a adoptar nuevas soluciones que mejoren su eficiencia y desempeño en la gestión de proyectos.
 
       Solo una raíz,siempre deja como titulo el "User Persona", respeta las jerarquias: Demografía,Datos de trabajo,Desafíos y necesidades, Objetivos y deseos, Comportamiento de compra, Comportamiento en línea, Frustraciones actuales, Expectativas del producto, Cita ficticia, Canales de comunicación y Notas adicionales  , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
   );
@@ -308,7 +303,7 @@ export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
         },
         {
           role: "assistant",
-          content: "Genera un User persona teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt + "Respeta la estructura"
+          content: "Genera un User persona teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt + "Aportando soluciones tecnologicas"
         }
       ],
       stream: true,

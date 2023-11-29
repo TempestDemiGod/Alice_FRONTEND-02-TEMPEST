@@ -206,7 +206,7 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [result, setResult] = useState("");
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
-  const [model, setModel] = useState("gpt-3.5-turbo");
+  const [model, setModel] = useState("gpt-3.5-turbo-16k");
   const [maxTokens, setMaxTokens] = useState(
     localStorage.getItem("maxTokens") || 3000
   );
