@@ -77,17 +77,17 @@ function SettingsTab({
   setToken,
   model,
   setModel,
-  promptTemplate,
-  setPromptTemplate,
+  // promptTemplate,
+  // setPromptTemplate,
   maxTokens,
   setMaxTokens,
   temperature,
   setTemperature
 }) {
-  const handlePromptTemplateChange = (e) => {
-    setPromptTemplate(e.target.value);
-    localStorage.setItem("promptTemplate", e.target.value);
-  };
+  // const handlePromptTemplateChange = (e) => {
+  //   setPromptTemplate(e.target.value);
+  //   localStorage.setItem("promptTemplate", e.target.value);
+  // };
 
   function extractIntFromString(str) {
     const result = str.match(/\d+/);
@@ -172,7 +172,7 @@ console.log('funciono chamo .. ' + idProject)
         />
       </div>
 
-      <div>
+      {/* <div>
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
@@ -182,7 +182,7 @@ console.log('funciono chamo .. ' + idProject)
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -206,9 +206,10 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [result, setResult] = useState("");
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
-  const [model, setModel] = useState("gpt-3.5-turbo-16k");
+  const [modalConfig, setModalConfig] = useState(true);
+  const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 3000
+    localStorage.getItem("maxTokens") || 2500
   );
   let respuesta = result
   let promptGlobal
@@ -239,26 +240,26 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
     localStorage.getItem("temperature") || 0.7
   );
 
-  const [promptTemplate, setPromptTemplate] = useState(
-    localStorage.getItem("promptTemplate") ||
-      `Cree un diagrama de Walt Disney basado en las aportaciones del usuario como estos ejemplos:
-       Método Walt Disney: 'Asistente virtual para la gestion de proyectos de innovación'
-       \t\tFase del Soñador:
-       \t\t\t\t\t\tLa visión más audaz para nuestro proyecto es transformar la forma en que se gestionan los proyectos de innovación mediante la creación de un asistente virtual altamente inteligente. Imaginemos un futuro donde la inteligencia artificial guía y potencia la creatividad de los equipos, acelerando el proceso de innovación de manera sorprendente.
-       \t\t\t\t\t\tEn un escenario ideal sin restricciones, nuestro asistente virtual sería capaz de comprender y generar ideas innovadoras, gestionar automáticamente los recursos necesarios, y adaptarse de manera proactiva a los cambios en el entorno. Además, facilitaría la colaboración entre equipos de manera fluida, independientemente de su ubicación geográfica.
-       \t\t\t\t\t\tEl éxito absoluto se reflejaría en la transformación radical de la eficiencia y la efectividad en la gestión de proyectos de innovación. Nuestro asistente virtual sería reconocido como un catalizador clave para el desarrollo de ideas revolucionarias, llevando a la empresa a la vanguardia de la innovación global.
-       \t\tFase del Realista:
-       \t\t\t\t\t\tPara implementar las ideas generadas, debemos comenzar por desarrollar un prototipo funcional del asistente virtual. Seleccionaríamos un equipo multidisciplinario, asignaríamos roles y estableceríamos un cronograma detallado para el desarrollo iterativo del prototipo.
-       \t\t\t\t\t\tNecesitamos recursos técnicos como desarrolladores de inteligencia artificial, programadores, y expertos en aprendizaje automático. Además, se requieren recursos financieros para la investigación y desarrollo. La disponibilidad de estos recursos dependerá de las alianzas estratégicas y la inversión que podamos asegurar.
-       \t\t\t\t\t\tLos pasos prácticos incluyen el desarrollo incremental del asistente, pruebas continuas con usuarios reales, y ajustes basados en retroalimentación. Además, debemos establecer alianzas con empresas de tecnología para acceder a recursos avanzados y garantizar la seguridad y ética en el uso de la inteligencia artificial.
-       \t\tFase del Crítico:
-       \t\t\t\t\t\tPosibles obstáculos podrían incluir la resistencia al cambio por parte de los equipos, problemas éticos relacionados con la inteligencia artificial, y desafíos regulatorios. La identificación y mitigación proactiva de estos obstáculos será crucial.
-       \t\t\t\t\t\tEs posible que algunos aspectos del plan inicial, como la velocidad de adopción por parte de los equipos, no sean tan eficientes como se espera. Se deben realizar evaluaciones periódicas y ajustar el plan según sea necesario para garantizar la eficiencia continua.
-       \t\t\t\t\t\tPara optimizar la viabilidad y el éxito, podríamos mejorar la interfaz del asistente para hacerla más intuitiva, proporcionar formación continua a los usuarios, y realizar actualizaciones regulares basadas en el feedback. Además, la colaboración con expertos en ética de la inteligencia artificial podría mejorar la aceptación y confianza en el sistema.
+  // const [promptTemplate, setPromptTemplate] = useState(
+  //   localStorage.getItem("promptTemplate") ||
+  //     `Cree un diagrama de Walt Disney basado en las aportaciones del usuario como estos ejemplos:
+  //      Método Walt Disney: 'Asistente virtual para la gestion de proyectos de innovación'
+  //      \t\tFase del Soñador:
+  //      \t\t\t\t\t\tLa visión más audaz para nuestro proyecto es transformar la forma en que se gestionan los proyectos de innovación mediante la creación de un asistente virtual altamente inteligente. Imaginemos un futuro donde la inteligencia artificial guía y potencia la creatividad de los equipos, acelerando el proceso de innovación de manera sorprendente.
+  //      \t\t\t\t\t\tEn un escenario ideal sin restricciones, nuestro asistente virtual sería capaz de comprender y generar ideas innovadoras, gestionar automáticamente los recursos necesarios, y adaptarse de manera proactiva a los cambios en el entorno. Además, facilitaría la colaboración entre equipos de manera fluida, independientemente de su ubicación geográfica.
+  //      \t\t\t\t\t\tEl éxito absoluto se reflejaría en la transformación radical de la eficiencia y la efectividad en la gestión de proyectos de innovación. Nuestro asistente virtual sería reconocido como un catalizador clave para el desarrollo de ideas revolucionarias, llevando a la empresa a la vanguardia de la innovación global.
+  //      \t\tFase del Realista:
+  //      \t\t\t\t\t\tPara implementar las ideas generadas, debemos comenzar por desarrollar un prototipo funcional del asistente virtual. Seleccionaríamos un equipo multidisciplinario, asignaríamos roles y estableceríamos un cronograma detallado para el desarrollo iterativo del prototipo.
+  //      \t\t\t\t\t\tNecesitamos recursos técnicos como desarrolladores de inteligencia artificial, programadores, y expertos en aprendizaje automático. Además, se requieren recursos financieros para la investigación y desarrollo. La disponibilidad de estos recursos dependerá de las alianzas estratégicas y la inversión que podamos asegurar.
+  //      \t\t\t\t\t\tLos pasos prácticos incluyen el desarrollo incremental del asistente, pruebas continuas con usuarios reales, y ajustes basados en retroalimentación. Además, debemos establecer alianzas con empresas de tecnología para acceder a recursos avanzados y garantizar la seguridad y ética en el uso de la inteligencia artificial.
+  //      \t\tFase del Crítico:
+  //      \t\t\t\t\t\tPosibles obstáculos podrían incluir la resistencia al cambio por parte de los equipos, problemas éticos relacionados con la inteligencia artificial, y desafíos regulatorios. La identificación y mitigación proactiva de estos obstáculos será crucial.
+  //      \t\t\t\t\t\tEs posible que algunos aspectos del plan inicial, como la velocidad de adopción por parte de los equipos, no sean tan eficientes como se espera. Se deben realizar evaluaciones periódicas y ajustar el plan según sea necesario para garantizar la eficiencia continua.
+  //      \t\t\t\t\t\tPara optimizar la viabilidad y el éxito, podríamos mejorar la interfaz del asistente para hacerla más intuitiva, proporcionar formación continua a los usuarios, y realizar actualizaciones regulares basadas en el feedback. Además, la colaboración con expertos en ética de la inteligencia artificial podría mejorar la aceptación y confianza en el sistema.
       
 
-      Solo una raíz, deja Método Walt Disney y agrega el tema como encabezado ,ademas sigue las tres fases: Fase del Soñador(abarca la visión del proyecto, elementos claves de un escenario  como se lograria el exito del proyecto), Fase del Realista(abarca que podemomos implementar para las ideas generadas en la fase de el soñador,los recursos que se necesitan) y Fase del Crítico (cuales son los posibles obstaculos que se pueden dar  y ajustes y mejoras que se pueden dar durante el desarrollo del tema).`
-  );
+  //     Solo una raíz, deja Método Walt Disney y agrega el tema como encabezado ,ademas sigue las tres fases: Fase del Soñador(abarca la visión del proyecto, elementos claves de un escenario  como se lograria el exito del proyecto), Fase del Realista(abarca que podemomos implementar para las ideas generadas en la fase de el soñador,los recursos que se necesitan) y Fase del Crítico (cuales son los posibles obstaculos que se pueden dar  y ajustes y mejoras que se pueden dar durante el desarrollo del tema).`
+  // );
   
 
   // gpt-3.5-turbo
@@ -271,17 +272,17 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
     const data = {
       model: model,
       messages: [
-        {
-          role: "system",
-          content: promptTemplate
-        },
+        // {
+        //   role: "system",
+        //   content: promptTemplate
+        // },
         {
           role: "user",
           content: prompt  
         },
         {
           role: "assistant",
-          content: "Me gustaria que des respuesta a las tres fase: Fase del Soñador, Fase del Realista y Fase del Crítico del Metodo Walt Disney y respeta la estructura segun el tema :" + prompt
+          content: "Realiza un Modelo  de Walt Disney siguiendo las  tres fases: Fase del Soñador(abarca la visión del proyecto, elementos claves de un escenario  como se lograria el exito del proyecto), Fase del Realista(abarca que podemomos implementar para las ideas generadas en la fase de el soñador,los recursos que se necesitan) y Fase del Crítico (cuales son los posibles obstaculos que se pueden dar  y ajustes y mejoras que se pueden dar durante el desarrollo del tema) del tema:"+ prompt +". Se especifico en en el desarollo del tema, ademas pon de titulo el tema al inicio de la respuesta y evita dar una introducción al inicio de la respuesta y un resumen al final de la respuesta, ademas  evita definir cada fase, finalmente respeta las jerarquias para que el modelo tenga una estructura."
         }
       ],
       stream: true,
@@ -394,15 +395,15 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+        </button>
+        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
-          className="tab-button btn btn-outline-primary"
+          className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
         >
           Artefacto
-        </button>
-        <button className="tab-button btn btn-outline-primary" onClick={() => setActiveTab("Settings")}>
-          Configuración
         </button>
       </div>
       {activeTab === "Mindmapping" ? (
@@ -413,7 +414,7 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
           setResult={setResult}
           callOpenAi={callOpenAi}
           model={model}
-          promptTemplate={promptTemplate}
+          // promptTemplate={promptTemplate}
         />
       ) : (
         <SettingsTab
@@ -421,15 +422,31 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
           setToken={setToken}
           model={model}
           setModel={setModel}
-          promptTemplate={promptTemplate}
-          setPromptTemplate={setPromptTemplate}
+          // promptTemplate={promptTemplate}
+          // setPromptTemplate={setPromptTemplate}
           maxTokens={maxTokens}
           setMaxTokens={setMaxTokens}
           temperature={temperature}
           setTemperature={setTemperature}
         />
       )}
-      
+      <div className="modalConfig" hidden={modalConfig}>
+        <section className="modal-contenedor-config container">
+          <SettingsTab
+            token={token}
+            setToken={setToken}
+            model={model}
+            setModel={setModel}
+            // promptTemplate={promptTemplate}
+            // setPromptTemplate={setPromptTemplate}
+            maxTokens={maxTokens}
+            setMaxTokens={setMaxTokens}
+            temperature={temperature}
+            setTemperature={setTemperature}
+          />
+          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>Guardar configuracion</button>
+        </section>
+      </div>
     </div>
   );
 }

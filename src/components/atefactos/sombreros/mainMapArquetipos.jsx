@@ -124,17 +124,17 @@ function SettingsTab({
   setToken,
   model,
   setModel,
-  promptTemplate,
-  setPromptTemplate,
+  // promptTemplate,
+  // setPromptTemplate,
   maxTokens,
   setMaxTokens,
   temperature,
   setTemperature
 }) {
-  const handlePromptTemplateChange = (e) => {
-    setPromptTemplate(e.target.value);
-    localStorage.setItem("promptTemplate", e.target.value);
-  };
+  // const handlePromptTemplateChange = (e) => {
+  //   setPromptTemplate(e.target.value);
+  //   localStorage.setItem("promptTemplate", e.target.value);
+  // };
 
   function extractIntFromString(str) {
     const result = str.match(/\d+/);
@@ -219,7 +219,7 @@ console.log('funciono chamo .. ' + idProject)
         />
       </div>
 
-      <div>
+      {/* <div>
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
@@ -229,7 +229,7 @@ console.log('funciono chamo .. ' + idProject)
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -251,11 +251,12 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   },[]);
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
+  const [modalConfig, setModalConfig] = useState(true);
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
-  const [model, setModel] = useState("gpt-3.5-turbo-16k");
+  const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 3000
+    localStorage.getItem("maxTokens") || 2500
   );
   let respuesta = result
   let promptGlobal
@@ -286,38 +287,38 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
     localStorage.getItem("temperature") || 0.7
   );
 
-  const [promptTemplate, setPromptTemplate] = useState(
-    localStorage.getItem("promptTemplate") ||
-      `Usa la tecnica de los 6 sombreros basado en las aportaciones del usuario como estos ejemplos:
+  // const [promptTemplate, setPromptTemplate] = useState(
+  //   localStorage.getItem("promptTemplate") ||
+  //     `Usa la tecnica de los 6 sombreros basado en las aportaciones del usuario como estos ejemplos:
 
-      Tecnica de los seis sombreros para pensar:
-      \t\tSombrero Blanco (Hechos y Datos):
-      \t\t\t\tContamos con datos objetivos que respaldan nuestra estrategia en Lean Startup, como el rápido aumento en la adopción de asistentes virtuales en entornos empresariales, según estudios de mercado recientes.
-      \t\t\t\tLas métricas de negocio respaldan nuestro enfoque actual, ya que hemos experimentado una mejora del 30% en la eficiencia del equipo desde la implementación del asistente virtual.
-      \t\t\t\tLa evidencia concreta de que nuestra hipótesis está siendo validada se refleja en la reducción del tiempo dedicado a tareas administrativas, liberando recursos para actividades más estratégicas.
-      \t\tSombrero Rojo (Emociones e Intuición):
-      \t\t\t\tEl equipo se siente entusiasmado y motivado por la dirección actual del proyecto en Lean Startup, ya que ven resultados tangibles que mejoran su día a día.
-      \t\t\t\tLa intuición general es positiva, respaldada por la retroalimentación emocional del equipo, quienes perciben el asistente virtual como una herramienta valiosa para la gestión de proyectos.
-      \t\t\t\tLas emociones positivas, como la satisfacción por la simplificación de procesos, influyen en nuestras decisiones, fortaleciendo el compromiso con la estrategia actual.
-      \t\tSombrero Negro (Pensamiento Crítico):
-      \t\t\t\tIdentificamos posibles obstáculos, como la resistencia al cambio entre algunos miembros del equipo, que podrían afectar la implementación del asistente virtual.
-      \t\t\t\tReconocemos los posibles problemas futuros, como desafíos de integración con otras plataformas, y estamos preparados para abordarlos proactivamente.
-      \t\t\t\t Al evaluar nuestra estrategia, tenemos en cuenta aspectos negativos como posibles brechas de seguridad, asegurando una implementación sólida y confiable.
-      \t\tSombrero Amarillo (Pensamiento Positivo):
-      \t\t\t\tLas oportunidades de continuar con nuestra estrategia actual incluyen la posibilidad de mejorar aún más la productividad y la calidad del trabajo, consolidando nuestra posición en el mercado.
-      \t\t\t\tAspectos positivos derivados de Lean Startup son la optimización de recursos y la capacidad de adaptación rápida a cambios en el entorno empresarial.
-      \t\t\t\tNuestras ventajas sobre otras alternativas incluyen la personalización del asistente virtual para cumplir con los requisitos específicos de la gestión de proyectos.
-      \t\tSombrero Verde (Creatividad e Ideas):
-      \t\t\t\tGeneramos ideas innovadoras, como la incorporación de funciones de aprendizaje automático para anticipar las necesidades del equipo y ofrecer sugerencias proactivas.
-      \t\t\t\tAbordamos desafíos actuales de manera diferente explorando la integración de interfaces de voz para una interacción más intuitiva con el asistente virtual.
-      \t\t\t\tSoluciones creativas incluyen el desarrollo de una interfaz de usuario altamente intuitiva y la exploración de integraciones con herramientas de gestión de proyectos de última generación.
-      \t\tSombrero Azul (Gestión del Proceso):
-      \t\t\t\tOrganizamos la discusión de manera efectiva, estableciendo reuniones periódicas de revisión de avances y retroalimentación para garantizar la alineación del equipo.
-      \t\t\t\tEl plan de acción incluye la implementación gradual de nuevas funcionalidades del asistente virtual, con evaluaciones regulares para ajustar la estrategia según sea necesario.
-      \t\t\t\tGarantizamos la alineación del equipo mediante la comunicación abierta y la formación continua para aprovechar al máximo las capacidades del asistente virtual.
+  //     Tecnica de los seis sombreros para pensar:
+  //     \t\tSombrero Blanco (Hechos y Datos):
+  //     \t\t\t\tContamos con datos objetivos que respaldan nuestra estrategia en Lean Startup, como el rápido aumento en la adopción de asistentes virtuales en entornos empresariales, según estudios de mercado recientes.
+  //     \t\t\t\tLas métricas de negocio respaldan nuestro enfoque actual, ya que hemos experimentado una mejora del 30% en la eficiencia del equipo desde la implementación del asistente virtual.
+  //     \t\t\t\tLa evidencia concreta de que nuestra hipótesis está siendo validada se refleja en la reducción del tiempo dedicado a tareas administrativas, liberando recursos para actividades más estratégicas.
+  //     \t\tSombrero Rojo (Emociones e Intuición):
+  //     \t\t\t\tEl equipo se siente entusiasmado y motivado por la dirección actual del proyecto en Lean Startup, ya que ven resultados tangibles que mejoran su día a día.
+  //     \t\t\t\tLa intuición general es positiva, respaldada por la retroalimentación emocional del equipo, quienes perciben el asistente virtual como una herramienta valiosa para la gestión de proyectos.
+  //     \t\t\t\tLas emociones positivas, como la satisfacción por la simplificación de procesos, influyen en nuestras decisiones, fortaleciendo el compromiso con la estrategia actual.
+  //     \t\tSombrero Negro (Pensamiento Crítico):
+  //     \t\t\t\tIdentificamos posibles obstáculos, como la resistencia al cambio entre algunos miembros del equipo, que podrían afectar la implementación del asistente virtual.
+  //     \t\t\t\tReconocemos los posibles problemas futuros, como desafíos de integración con otras plataformas, y estamos preparados para abordarlos proactivamente.
+  //     \t\t\t\t Al evaluar nuestra estrategia, tenemos en cuenta aspectos negativos como posibles brechas de seguridad, asegurando una implementación sólida y confiable.
+  //     \t\tSombrero Amarillo (Pensamiento Positivo):
+  //     \t\t\t\tLas oportunidades de continuar con nuestra estrategia actual incluyen la posibilidad de mejorar aún más la productividad y la calidad del trabajo, consolidando nuestra posición en el mercado.
+  //     \t\t\t\tAspectos positivos derivados de Lean Startup son la optimización de recursos y la capacidad de adaptación rápida a cambios en el entorno empresarial.
+  //     \t\t\t\tNuestras ventajas sobre otras alternativas incluyen la personalización del asistente virtual para cumplir con los requisitos específicos de la gestión de proyectos.
+  //     \t\tSombrero Verde (Creatividad e Ideas):
+  //     \t\t\t\tGeneramos ideas innovadoras, como la incorporación de funciones de aprendizaje automático para anticipar las necesidades del equipo y ofrecer sugerencias proactivas.
+  //     \t\t\t\tAbordamos desafíos actuales de manera diferente explorando la integración de interfaces de voz para una interacción más intuitiva con el asistente virtual.
+  //     \t\t\t\tSoluciones creativas incluyen el desarrollo de una interfaz de usuario altamente intuitiva y la exploración de integraciones con herramientas de gestión de proyectos de última generación.
+  //     \t\tSombrero Azul (Gestión del Proceso):
+  //     \t\t\t\tOrganizamos la discusión de manera efectiva, estableciendo reuniones periódicas de revisión de avances y retroalimentación para garantizar la alineación del equipo.
+  //     \t\t\t\tEl plan de acción incluye la implementación gradual de nuevas funcionalidades del asistente virtual, con evaluaciones regulares para ajustar la estrategia según sea necesario.
+  //     \t\t\t\tGarantizamos la alineación del equipo mediante la comunicación abierta y la formación continua para aprovechar al máximo las capacidades del asistente virtual.
 
-      Solo una raíz, deja el titulo como encabezado y respeta la jerarquia de los sobreros Y responde cada pregunta plateada, No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
-  );
+  //     Solo una raíz, deja el titulo como encabezado y respeta la jerarquia de los sobreros Y responde cada pregunta plateada, No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+  // );
   
 
   // gpt-3.5-turbo
@@ -330,17 +331,17 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
     const data = {
       model: model,
       messages: [
-        {
-          role: "system",
-          content: promptTemplate
-        },
+        // {
+        //   role: "system",
+        //   content: promptTemplate
+        // },
         {
           role: "user",
           content: prompt  
         },
         {
           role: "assistant",
-          content: "Realiza la tecnica de los 6 sombreros para pensar teniendo como enfoque dar una solución al tema:" + prompt + "Atravez de ideas inovadoras."
+          content: "Realiza la tecnica de los 6 sombreros para pensar teniendo como enfoque dar una solución al tema:" + prompt + "Teniendo en cuenta la siguiente estructura: Sombrero Blanco en donde se abarca datos objetivos que respaldan nuestra estrategia, Metricas del negocio o tema y evidencia concreta para concretar la hipotesis. Sombrero Rojo: abarca qué emociones podrían influir en el desarrollo del tema. Sombrero Negro: abarca cuáles son los posibles obstáculos o riesgos asociados con nuestro enfoque del tema y evaluar posibles problemas o desafios en el proyecto. Sombrero Amarillo: abarca Cuáles son las oportunidades y beneficios, aspectos positivos y ventajas que se puedan tener en base a otros proyectos. Sombrero Verde: abarca ideas innovadoras podemos generar para mejorar el proyecto, como podriamos afrontar desafios y crear soluciones creativas. Sombrero Azul: abarca Cómo podemos organizar y estructurar nuestra discusión y toma de decisiones, Cuál es el plan de acción para implementar los cambios o decisiones resultantes del desarrollo del proyecto. Finalmente establece una estructura por cada partado y centrate en fundamentar cada sombrero segun el tema"
         }
       ],
       stream: true,
@@ -451,15 +452,15 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+        </button>
+        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
-          className="tab-button btn btn-outline-primary"
+          className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
         >
           Artefacto
-        </button>
-        <button className="tab-button btn btn-outline-primary" onClick={() => setActiveTab("Settings")}>
-          Configuración
         </button>
       </div>
       {activeTab === "Mindmapping" ? (
@@ -470,7 +471,7 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
           setResult={setResult}
           callOpenAi={callOpenAi}
           model={model}
-          promptTemplate={promptTemplate}
+          // promptTemplate={promptTemplate}
         />
       ) : (
         <SettingsTab
@@ -478,15 +479,31 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
           setToken={setToken}
           model={model}
           setModel={setModel}
-          promptTemplate={promptTemplate}
-          setPromptTemplate={setPromptTemplate}
+          // promptTemplate={promptTemplate}
+          // setPromptTemplate={setPromptTemplate}
           maxTokens={maxTokens}
           setMaxTokens={setMaxTokens}
           temperature={temperature}
           setTemperature={setTemperature}
         />
       )}
-      
+      <div className="modalConfig" hidden={modalConfig}>
+        <section className="modal-contenedor-config container">
+          <SettingsTab
+            token={token}
+            setToken={setToken}
+            model={model}
+            setModel={setModel}
+            // promptTemplate={promptTemplate}
+            // setPromptTemplate={setPromptTemplate}
+            maxTokens={maxTokens}
+            setMaxTokens={setMaxTokens}
+            temperature={temperature}
+            setTemperature={setTemperature}
+          />
+          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>Guardar Configuracion</button>
+        </section>
+      </div>
     </div>
   );
 }

@@ -205,6 +205,7 @@ export default function MapaImpacto({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [result, setResult] = useState("");
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
+  const [modalConfig, setModalConfig] = useState(true);
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
     localStorage.getItem("maxTokens") || 3000
@@ -390,15 +391,15 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+        </button>
+        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
-          className="tab-button btn btn-outline-primary"
+          className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
         >
           Artefacto
-        </button>
-        <button className="tab-button btn btn-outline-primary" onClick={() => setActiveTab("Settings")}>
-          Configuración
         </button>
       </div>
       {activeTab === "Mindmapping" ? (
@@ -425,7 +426,23 @@ Solo una raíz, deja la palabra mindmap como encabezado y evita poner mermaid en
           setTemperature={setTemperature}
         />
       )}
-      
+      <div className="modalConfig" hidden={modalConfig}>
+        <section className="modal-contenedor-config container">
+          <SettingsTab
+            token={token}
+            setToken={setToken}
+            model={model}
+            setModel={setModel}
+            promptTemplate={promptTemplate}
+            setPromptTemplate={setPromptTemplate}
+            maxTokens={maxTokens}
+            setMaxTokens={setMaxTokens}
+            temperature={temperature}
+            setTemperature={setTemperature}
+          />
+          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>Guardar configuracion</button>
+        </section>
+      </div>
     </div>
   );
 }

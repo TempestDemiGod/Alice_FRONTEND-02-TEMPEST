@@ -78,17 +78,17 @@ function SettingsTab({
   setToken,
   model,
   setModel,
-  promptTemplate,
-  setPromptTemplate,
+  // promptTemplate,
+  // setPromptTemplate,
   maxTokens,
   setMaxTokens,
   temperature,
   setTemperature
 }) {
-  const handlePromptTemplateChange = (e) => {
-    setPromptTemplate(e.target.value);
-    localStorage.setItem("promptTemplate", e.target.value);
-  };
+  // const handlePromptTemplateChange = (e) => {
+  //   setPromptTemplate(e.target.value);
+  //   localStorage.setItem("promptTemplate", e.target.value);
+  // };
 
   function extractIntFromString(str) {
     const result = str.match(/\d+/);
@@ -173,7 +173,7 @@ console.log('funciono chamo .. ' + idProject)
         />
       </div>
 
-      <div>
+      {/* <div>
         <label htmlFor="promptTemplate">Prompt Template:</label>
         <textarea
           type="text"
@@ -183,7 +183,7 @@ console.log('funciono chamo .. ' + idProject)
           value={promptTemplate}
           onChange={handlePromptTemplateChange}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -205,9 +205,10 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
   },[]);
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
+  const [modalConfig, setModalConfig] = useState(true);
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
-  const [model, setModel] = useState("gpt-3.5-turbo-16k");
+  const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
     localStorage.getItem("maxTokens") || 3000
   );
@@ -240,23 +241,23 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
     localStorage.getItem("temperature") || 0.7
   );
 
-  const [promptTemplate, setPromptTemplate] = useState(
-    localStorage.getItem("promptTemplate") ||
-      `Cree un user Research  basado en las aportaciones del usuario como estos ejemplos:
-      \tTema: Asistente Virtual en la gestion de proyectos
-      \t\t\tDefinición de Objetivos
-      \t\t\t\tQueremos entender a fondo las necesidades y desafíos específicos que enfrentan los profesionales de la gestión de proyectos en su día a día. Además, buscamos validar la viabilidad y aceptación de un asistente virtual diseñado para mejorar la eficiencia y la efectividad en la gestión de proyectos.
-      \t\t\tElección de Métodos
-      \t\t\t\tOptaremos por una combinación de entrevistas y pruebas de usabilidad. Las entrevistas nos permitirán obtener percepciones cualitativas profundas sobre las experiencias, desafíos y expectativas de los usuarios. Las pruebas de usabilidad nos darán información práctica sobre la facilidad de uso y la eficacia del asistente virtual en situaciones simuladas.
-      \t\t\tRecopilación de Datos
-      \t\t\t\tRealizaremos entrevistas individuales con profesionales de la gestión de proyectos, abordando preguntas específicas sobre sus métodos actuales, desafíos comunes y posibles mejoras. También implementaremos pruebas de usabilidad, solicitando a los participantes que realicen tareas representativas utilizando el asistente virtual.
-      \t\t\tAnálisis de Datos
-      \t\t\t\tLos datos recopilados se analizarán para identificar patrones en las respuestas de los usuarios, destacando las áreas de mayor interés y las posibles mejoras necesarias en el diseño del asistente virtual. Buscaremos tendencias en términos de preferencias de funcionalidades y aspectos de usabilidad.
-      \t\t\tPresentación de Resultados
-      \t\t\t\tLos resultados se presentarán de manera clara y accesible a los equipos de desarrollo, marketing y ventas. Se proporcionarán recomendaciones basadas en los hallazgos, resaltando las oportunidades de mejora y destacando las características del asistente virtual que han recibido una respuesta positiva por parte de los usuarios.
+  // const [promptTemplate, setPromptTemplate] = useState(
+  //   localStorage.getItem("promptTemplate") ||
+  //     `Cree un user Research  basado en las aportaciones del usuario como estos ejemplos:
+  //     \tTema: Asistente Virtual en la gestion de proyectos
+  //     \t\t\tDefinición de Objetivos
+  //     \t\t\t\tQueremos entender a fondo las necesidades y desafíos específicos que enfrentan los profesionales de la gestión de proyectos en su día a día. Además, buscamos validar la viabilidad y aceptación de un asistente virtual diseñado para mejorar la eficiencia y la efectividad en la gestión de proyectos.
+  //     \t\t\tElección de Métodos
+  //     \t\t\t\tOptaremos por una combinación de entrevistas y pruebas de usabilidad. Las entrevistas nos permitirán obtener percepciones cualitativas profundas sobre las experiencias, desafíos y expectativas de los usuarios. Las pruebas de usabilidad nos darán información práctica sobre la facilidad de uso y la eficacia del asistente virtual en situaciones simuladas.
+  //     \t\t\tRecopilación de Datos
+  //     \t\t\t\tRealizaremos entrevistas individuales con profesionales de la gestión de proyectos, abordando preguntas específicas sobre sus métodos actuales, desafíos comunes y posibles mejoras. También implementaremos pruebas de usabilidad, solicitando a los participantes que realicen tareas representativas utilizando el asistente virtual.
+  //     \t\t\tAnálisis de Datos
+  //     \t\t\t\tLos datos recopilados se analizarán para identificar patrones en las respuestas de los usuarios, destacando las áreas de mayor interés y las posibles mejoras necesarias en el diseño del asistente virtual. Buscaremos tendencias en términos de preferencias de funcionalidades y aspectos de usabilidad.
+  //     \t\t\tPresentación de Resultados
+  //     \t\t\t\tLos resultados se presentarán de manera clara y accesible a los equipos de desarrollo, marketing y ventas. Se proporcionarán recomendaciones basadas en los hallazgos, resaltando las oportunidades de mejora y destacando las características del asistente virtual que han recibido una respuesta positiva por parte de los usuarios.
       
-      Solo una raíz de tema y pon el titulo User Research, respeta la jerarquia: Definición de Objetivos,Elección de Métodos,Recopilación de Datos,Análisis de Datos y Presentación de Resultados , ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
-  );
+  //     Solo una raíz de tema y pon el titulo User Research, respeta la jerarquia: Definición de Objetivos,Elección de Métodos,Recopilación de Datos,Análisis de Datos y Presentación de Resultados , ademas despues de cada numero genera ":" , No es necesario utilizar "mermaid". No es necesario utilizar "mermaid", "\`\`\`", or "graph TD". Responder sólo con código y sintaxis.`
+  // );
   
 
   // gpt-3.5-turbo
@@ -269,17 +270,17 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
     const data = {
       model: model,
       messages: [
-        {
-          role: "system",
-          content: promptTemplate
-        },
+        // {
+        //   role: "system",
+        //   content: promptTemplate
+        // },
         {
           role: "user",
           content: prompt  
         },
         {
           role: "assistant",
-          content: "Genera un User Research teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt
+          content: "Genera un User Research teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt + "Respondiendo las siguientes preguntas: 1. Definición de objetivos: El primer paso es definir los objetivos de la investigación. ¿Qué queremos aprender sobre los usuarios? ¿Qué queremos validar?, 2. Definición de la audiencia: ¿Quiénes son los usuarios que queremos investigar? ¿Cuáles son sus características demográficas, psicográficas y conductuales?, 3. Elección de métodos: Existen una variedad de métodos de investigación de usuarios, como entrevistas, encuestas, grupos de discusión, observación y pruebas de usabilidad. El método que se elija dependerá de los objetivos de la investigación y de la audiencia que se quiera estudiar. 4. Recopilación de datos: Una vez se ha definido el método, se procede a la recopilación de datos. Esto puede implicar realizar entrevistas, encuestas, grupos de discusión, observación o pruebas de usabilidad. 5. Análisis de datos: Los datos recopilados se analizan para identificar patrones y tendencias y 6. Presentación de resultados: Los resultados de la investigación se presentan a los interesados, como los equipos de desarrollo, marketing y ventas. Finalmente fundamenta cada respuesta y centrate en desarrollar el tema ."
         }
       ],
       stream: true,
@@ -391,15 +392,15 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>guardar mapa</button>
+      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+        </button>
+        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
-          className="tab-button btn btn-outline-primary"
+          className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
         >
           Artefacto
-        </button>
-        <button className="tab-button btn btn-outline-primary" onClick={() => setActiveTab("Settings")}>
-          Configuración
         </button>
       </div>
       {activeTab === "Mindmapping" ? (
@@ -410,7 +411,7 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
           setResult={setResult}
           callOpenAi={callOpenAi}
           model={model}
-          promptTemplate={promptTemplate}
+          // promptTemplate={promptTemplate}
         />
       ) : (
         <SettingsTab
@@ -418,15 +419,31 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
           setToken={setToken}
           model={model}
           setModel={setModel}
-          promptTemplate={promptTemplate}
-          setPromptTemplate={setPromptTemplate}
+          // promptTemplate={promptTemplate}
+          // setPromptTemplate={setPromptTemplate}
           maxTokens={maxTokens}
           setMaxTokens={setMaxTokens}
           temperature={temperature}
           setTemperature={setTemperature}
         />
       )}
-      
+      <div className="modalConfig" hidden={modalConfig}>
+        <section className="modal-contenedor-config container">
+          <SettingsTab
+            token={token}
+            setToken={setToken}
+            model={model}
+            setModel={setModel}
+            // promptTemplate={promptTemplate}
+            // setPromptTemplate={setPromptTemplate}
+            maxTokens={maxTokens}
+            setMaxTokens={setMaxTokens}
+            temperature={temperature}
+            setTemperature={setTemperature}
+          />
+          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>Guardar Configuracion</button>
+        </section>
+      </div>
     </div>
   );
 }

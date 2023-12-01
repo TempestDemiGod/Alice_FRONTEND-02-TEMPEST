@@ -252,9 +252,10 @@ export default function MapaCustomer({id,tema,api,respuestaDB,ArtecatoDB,descrip
   const [result, setResult] = useState("");
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
+  const [modalConfig, setModalConfig] = useState(true);
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2000
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
@@ -343,7 +344,7 @@ Solo una raíz, deja la palabra "journey" como encabezado y ademas despues de ca
         },
         {
           role: "assistant",
-          content: "Genera una lista de actividades que den solucion al problema:" + description + " con las estimaciones no mayor de 7 dias del tema:" + prompt 
+          content: "Genera una lista de actividades que den solucion al problema:" + description + " con las estimaciones no mayor de 7 dias del tema:" + prompt +"ademas no olvides poner los ':' antes de y despues de cada numero. "
         }
       ],
       stream: true,
@@ -444,15 +445,15 @@ Solo una raíz, deja la palabra "journey" como encabezado y ademas despues de ca
   return (
     <div className="App">
       <div className="tab-buttons">
-        <button className="tab-button btn btn-outline-success"  onClick={() => guardarMapa()}>guardar mapa</button>
+      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+        </button>
+        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
-          className="tab-button btn btn-outline-primary"
+          className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
         >
           Artefacto
-        </button>
-        <button className="tab-button btn btn-outline-primary" onClick={() => setActiveTab("Settings")}>
-          Configuración
         </button>
       </div>
       {activeTab === "Mindmapping" ? (
@@ -479,7 +480,23 @@ Solo una raíz, deja la palabra "journey" como encabezado y ademas despues de ca
           setTemperature={setTemperature}
         />
       )}
-      
+      <div className="modalConfig" hidden={modalConfig}>
+        <section className="modal-contenedor-config container">
+          <SettingsTab
+            token={token}
+            setToken={setToken}
+            model={model}
+            setModel={setModel}
+            promptTemplate={promptTemplate}
+            setPromptTemplate={setPromptTemplate}
+            maxTokens={maxTokens}
+            setMaxTokens={setMaxTokens}
+            temperature={temperature}
+            setTemperature={setTemperature}
+          />
+          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>Guardar configuracion</button>
+        </section>
+      </div>
     </div>
   );
 }

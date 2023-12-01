@@ -36,7 +36,7 @@ export const MenuMain = () => {
                 <Link className='option-nav text-decoration-none text-white' to={'/Home'} >Inicio <div className='option-line01'></div></Link>
                 <Nav.Link className='option-nav' href="https://www.youtube.com/shorts/feWo4416W-E" target='_blank'>Que es Alice <div className='option-line01'></div></Nav.Link>
                 <Nav.Link className='option-nav' href="https://www.bbva.com/es/innovacion/lean-startup-ejemplos-de-empresas-de-exito/" target='_blank'>Que es Lean StartUp? <div className='option-line02'></div></Nav.Link>
-                <Nav.Link className='option-nav' href="https://www.youtube.com/shorts/feWo4416W-E" target='_blank'>Tutorial De ALICE <div className='option-line02'></div></Nav.Link>
+                <Nav.Link className='option-nav' href="https://www.youtube.com/watch?v=O2EuhTvw-QA" target='_blank'>Tutorial De ALICE <div className='option-line02'></div></Nav.Link>
                 <Link className='option-nav text-decoration-none text-white' to={'/'} onClick={()=>logout()}>Cerrar Sesion</Link>
               </Nav>
               </div>
