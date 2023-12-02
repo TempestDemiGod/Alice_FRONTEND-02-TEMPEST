@@ -257,7 +257,7 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2500
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
