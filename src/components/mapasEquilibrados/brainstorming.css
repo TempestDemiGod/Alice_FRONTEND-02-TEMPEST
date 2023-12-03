@@ -66,6 +66,21 @@
   border-radius: .4rem;
   background: rgb(232, 212, 191);
 }
+.tab-buttons{
+  display: flex;
+  justify-content: end;
+}
+.medio{
+  display: flex;
+  align-items: center;
+  padding: 0 2vw;
+}
+
+/* .config-main{
+  position: absolute;
+  right: 0;
+  top: 20vh;
+} */
 /* path.edge {
     stroke: #d03bf5 !important;
   }

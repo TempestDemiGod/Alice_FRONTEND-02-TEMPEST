@@ -205,6 +205,7 @@ export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
   },[]);
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
+  const [modalConfig, setModalConfig] = useState(true);
   const [activeTab, setActiveTab] = useState("Mindmapping");
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");

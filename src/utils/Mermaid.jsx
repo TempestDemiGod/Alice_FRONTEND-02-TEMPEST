@@ -199,12 +199,12 @@ export default class Mermaid extends React.Component {
   render() {
     return (
       <>
-        <div className="buttonContainer d-flex justify-content-center mt-4">
-          <button className="mx-2 btn btn-outline-success" onClick={() => this.saveAsPNG()}>Descargar en PNG</button>
-          <button className="mx-2 btn btn-outline-success" onClick={() => this.saveAsSVG()}>Descargar en SVG </button>
-        </div>
         <div id="mermaidChart" className="mermaid">
           {this.props.chart}
+        </div>
+        <div className="buttonContainer d-flex justify-content-center mt-4 pb-4">
+          <button className="mx-2 btn btn-outline-success" onClick={() => this.saveAsPNG()}>Descargar en PNG</button>
+          <button className="mx-2 btn btn-outline-success" onClick={() => this.saveAsSVG()}>Descargar en SVG </button>
         </div>
       </>
     );

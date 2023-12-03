@@ -102,6 +102,9 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
+        <div className="medio">
+        <button className="btn form-control btn btn-outline-dark medio-btn" onClick={() => callOpenAi()}>Generar Artefacto</button>
+        </div>
         <div>
           <div className="title-map-box">Salida</div>
           <div className="textarea">
@@ -112,7 +115,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark" onClick={() => callOpenAi()}>Generar Artefacto</button>
+      
       <Mermaid key={result ? result.length : 0} chart={result} />
     </div>
   );
@@ -431,8 +434,8 @@ Solo una raíz ,deja como titulo: "mindmap" y seguidos por el root, use íconos 
   return (
     <div className="App">
       <div className="tab-buttons">
-      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
-      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+      <button className="tab-button btn btn-outline-primary config-main" onClick={() => setModalConfig(false)}>
+      <i className="fa fa-cog" aria-hidden="true"></i>
         </button>
         <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
