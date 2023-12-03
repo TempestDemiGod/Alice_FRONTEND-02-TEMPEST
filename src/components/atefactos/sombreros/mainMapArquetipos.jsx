@@ -169,6 +169,7 @@ console.log('funciono chamo .. ' + idProject)
 
   return (
     <div>
+      <h1 className="mt-4 mb-3"><i className="fa fa-cog" aria-hidden="true"></i> Configuraciones</h1>
       <div>OpenAI API_KEY</div>
       <div>
         <input
@@ -256,7 +257,7 @@ export default function MapaSombrero({id,tema,api,respuestaDB,ArtecatoDB}) {
   const [token, setToken] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [maxTokens, setMaxTokens] = useState(
-    localStorage.getItem("maxTokens") || 2500
+    localStorage.getItem("maxTokens") || 3000
   );
   let respuesta = result
   let promptGlobal
