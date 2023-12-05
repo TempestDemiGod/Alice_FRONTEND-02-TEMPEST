@@ -6,6 +6,9 @@
   width: max-content;
   margin: 2rem auto;
 }
+.lol{
+  min-height: 90vh;
+}
 .tab-buttons{
   width: 100%;
   display: flex;

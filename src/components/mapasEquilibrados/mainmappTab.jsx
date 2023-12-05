@@ -171,7 +171,6 @@ console.log('funciono chamo .. ' + idProject)
 
   return (
     <div>
-      <h1 className="mt-4 mb-3"><i className="fa fa-cog" aria-hidden="true"></i> Configuraciones</h1>
       <div>OpenAI API_KEY</div>
       <div>
         <input

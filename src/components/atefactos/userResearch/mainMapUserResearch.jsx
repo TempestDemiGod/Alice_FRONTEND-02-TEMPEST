@@ -44,7 +44,7 @@ async function verProyecto(){
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
 
   return (
-    <div className="App">
+    <div className="App lol">
       <div className="outer parametros-textos">
         <div className="text-extendido-textos">
           <div>Prompt de entrada</div>
@@ -57,7 +57,8 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div className="text-extendido-textos">
+        <button className="btn form-control btn btn-outline-dark mt-4 mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+        <div className="text-extendido-textos pb-4">
           <div>Salida</div>
           <div className="textarea text-extendido">
             <textarea
@@ -67,7 +68,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+      
       {/* <Mermaid key={result ? result.length : 0} chart={result} /> */}
     </div>
   );
@@ -281,7 +282,7 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
         },
         {
           role: "assistant",
-          content: "Genera un User Research teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt + "Respondiendo las siguientes preguntas: 1. Definición de objetivos: El primer paso es definir los objetivos de la investigación. ¿Qué queremos aprender sobre los usuarios? ¿Qué queremos validar?, 2. Definición de la audiencia: ¿Quiénes son los usuarios que queremos investigar? ¿Cuáles son sus características demográficas, psicográficas y conductuales?, 3. Elección de métodos: Existen una variedad de métodos de investigación de usuarios, como entrevistas, encuestas, grupos de discusión, observación y pruebas de usabilidad. El método que se elija dependerá de los objetivos de la investigación y de la audiencia que se quiera estudiar. 4. Recopilación de datos: Una vez se ha definido el método, se procede a la recopilación de datos. Esto puede implicar realizar entrevistas, encuestas, grupos de discusión, observación o pruebas de usabilidad. 5. Análisis de datos: Los datos recopilados se analizan para identificar patrones y tendencias y 6. Presentación de resultados: Los resultados de la investigación se presentan a los interesados, como los equipos de desarrollo, marketing y ventas. Finalmente fundamenta cada respuesta y centrate en desarrollar el tema ."
+          content: "Genera un User Research teniendo en cuenta el framework Lean StartUp sobre el siguiente tema:" + prompt +  "Respondiendo las siguientes preguntas: 1. Definición de objetivos: El primer paso es definir los objetivos de la investigación. ¿Qué queremos aprender sobre los usuarios? ¿Qué queremos validar?, 2. Definición de la audiencia: ¿Quiénes son los usuarios que queremos investigar? ¿Cuáles son sus características demográficas, psicográficas y conductuales?, 3. Elección de métodos: Existen una variedad de métodos de investigación de usuarios, como entrevistas, encuestas, grupos de discusión, observación y pruebas de usabilidad. El método que se elija dependerá de los objetivos de la investigación y de la audiencia que se quiera estudiar. 4. Recopilación de datos:  Una vez se ha definido el método,  Realiza una encuesta  de 10 preguntas para este apartado para cumplir los objetivos  planeados . 5. Análisis de datos: Los datos recopilados de la encuesta se analizan para identificar patrones y tendencias y 6. Presentación de resultados: Los resultados de la investigación se presentan a los interesados, como los equipos de desarrollo, marketing y ventas. Finalmente fundamenta cada respuesta y centrate en desarrollar el tema . Finalmente estructura con viñetas y sangrias los apartados"
         }
       ],
       stream: true,
@@ -394,7 +395,7 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
     <div className="App">
       <div className="tab-buttons">
       <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
-      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+      <i className="fa fa-cog" aria-hidden="true"></i> 
         </button>
         <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button

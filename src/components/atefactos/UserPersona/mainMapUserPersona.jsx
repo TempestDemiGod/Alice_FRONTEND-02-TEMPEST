@@ -45,7 +45,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
 
 
   return (
-    <div className="App">
+    <div className="App lol">
       <div className="outer parametros-textos">
         <div className="text-extendido-textos">
           <div>Prompt de entrada</div>
@@ -58,7 +58,8 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div className="text-extendido-textos">
+        <button className="btn form-control btn btn-outline-dark mt-4 mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+        <div className="text-extendido-textos pb-4">
           <div >Salida</div>
           <div className="textarea text-extendido">
             <textarea
@@ -68,7 +69,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
           </div>
         </div>
       </div>
-      <button className="btn form-control btn btn-outline-dark mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+      
     </div>
   );
 }
@@ -417,7 +418,7 @@ export default function MapUserPersona({id,tema,api,respuestaDB,ArtecatoDB}) {
     <div className="App">
       <div className="tab-buttons">
         <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
-      <i className="fa fa-cog" aria-hidden="true"></i> Configuración
+      <i className="fa fa-cog" aria-hidden="true"></i>
         </button>
         <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
