@@ -8,7 +8,7 @@ export const InicioInfo = () => {
       <div className="container box">
         <h1>Aplicacion ALICE</h1>
         
-        <div className="container-carrusel">
+        <div className="">
           
         <Carousel className="carrusel-inicio">
         <Carousel.Item interval={1000}>
@@ -40,8 +40,10 @@ export const InicioInfo = () => {
    </div>
 
    <div className="info-top-inicio mb-5">
-         
-          <div className="left-info">
+          <div className=" derecha-info">
+            <img className="sombra" src={brain} />
+          </div>
+          <div className=" left-info">
           <h2>Que nos impulso a crear ALICE? </h2>
             <p>
             Alice es una aplicación la cual fue creada con el objetivo de que los usuarios puedan tener una trazabilidad coherente en sus
@@ -57,10 +59,7 @@ export const InicioInfo = () => {
             la eficiencia al tiempo que minimiza el desperdicio. En su núcleo, se basa en la aplicación de los principios lean a la creación de
             empresas, adoptando un ciclo de aprendizaje rápido y adaptativo. El framework Lean Startup, popularizado por Eric Ries, se centra en la
             construcción iterativa y el aprendizaje validado, alentando a los emprendedores a validar sus hipótesis de negocio a través de
-            experimentos de manera ágil. Se compone de procesos como la creación de un MVP (Producto Mínimo Viable), la medición de resultados, y la
-            adaptación continua a través de ciclos de construir-medir-aprender, permitiendo a las startups pivotar o perseverar en sus estrategias
-            según la retroalimentación del mercado. Este enfoque no solo reduce el riesgo de fracaso al validar ideas de manera temprana, sino que
-            también optimiza la asignación de recursos, acelerando así el camino hacia el desarrollo de productos exitosos.
+            experimentos de manera ágil.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item className="Acordion-03" eventKey="1">
@@ -102,9 +101,7 @@ export const InicioInfo = () => {
     </div>
           </div>
           
-          <div className="sombra">
-            <img src={brain} />
-          </div>
+          
         </div>
     
     

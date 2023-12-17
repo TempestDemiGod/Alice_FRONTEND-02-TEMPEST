@@ -57,7 +57,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <button className="btn form-control btn btn-outline-dark mt-4 mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+        <button className="btn form-control btn btn-dark mt-4 mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
         <div className="text-extendido-textos pb-4">
           <div>Salida</div>
           <div className="textarea text-extendido ">
@@ -397,10 +397,10 @@ export default function Disney({id,tema,api,respuestaDB,ArtecatoDB}) {
   return (
     <div className="App">
       <div className="tab-buttons">
-      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <button className="tab-button btn btn-primary" onClick={() => setModalConfig(false)}>
       <i className="fa fa-cog" aria-hidden="true"></i>
         </button>
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
+        <button className="tab-button btn btn-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
           className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}

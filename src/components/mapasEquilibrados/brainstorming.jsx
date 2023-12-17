@@ -20,7 +20,7 @@ export const Brainstorming = () => {
   return(
     <div className="contenedor-artefacto">
       <MenuMain />
-      <div className="container">
+      <div className="">
         <h1 className="title-top">BRAINSTORMING</h1>
         <Mapa id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
       </div>

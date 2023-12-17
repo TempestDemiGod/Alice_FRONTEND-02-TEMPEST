@@ -19,7 +19,7 @@ export const Impacto = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-      <div className="container">
+      <div className="user-lol">
       <h1 className="title-top">MAPA DE IMPACTO</h1>
       <MapaImpacto id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
     </div>

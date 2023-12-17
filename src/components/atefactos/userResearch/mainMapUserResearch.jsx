@@ -57,7 +57,7 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <button className="btn form-control btn btn-outline-dark mt-4 mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
+        <button className="btn form-control btn btn-dark mt-4 mb-4" onClick={() => callOpenAi()}>Generar Artefacto</button>
         <div className="text-extendido-textos pb-4">
           <div>Salida</div>
           <div className="textarea text-extendido">
@@ -394,10 +394,10 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
   return (
     <div className="App">
       <div className="tab-buttons">
-      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <button className="tab-button btn btn-primary" onClick={() => setModalConfig(false)}>
       <i className="fa fa-cog" aria-hidden="true"></i> 
         </button>
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
+        <button className="tab-button btn btn-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
           className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
@@ -430,7 +430,7 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
         />
       )}
       <div className="modalConfig" hidden={modalConfig}>
-        <section className="modal-contenedor-config container">
+        <section className="modal-contenedor-config text-dark container">
           <SettingsTab
             token={token}
             setToken={setToken}
@@ -443,7 +443,7 @@ export default function UserResearchMap({id,tema,api,respuestaDB,ArtecatoDB}) {
             temperature={temperature}
             setTemperature={setTemperature}
           />
-          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>Guardar Configuracion</button>
+          <button className="tab-button mt-4 mb-4 form-control btn btn-success" onClick={() => setModalConfig(true) }>Guardar Configuracion</button>
         </section>
       </div>
     </div>

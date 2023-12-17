@@ -21,7 +21,7 @@ export const Afinidad = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-       <div className="container">
+       <div className=" user-lol">
       <h1 className="title-top">MAPA DE AFINIDAD</h1>
       <MapaAfinidad id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
     </div>

@@ -20,7 +20,7 @@ export const Empatia = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-       <div className="container">
+       <div className="user-lol">
       <h1 className="title-top">MAPA DE EMPATIA</h1>
       <MapaEmpatia id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID} />
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserResearchMap from "./mainMapUserResearch.jsx";
 import "../../mapasEquilibrados/brainstorming.css";
+import "./user.css";
 import { useLocation } from "react-router-dom";
 import MenuMain from "../../navbar/Navbar.jsx";
 export const UserResearch = () => {
@@ -18,7 +19,7 @@ export const UserResearch = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-       <div className="container">
+       <div className="container user-lol">
       <h1 className="title-top">USER RESEARCH</h1>
       <UserResearchMap id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
     </div>

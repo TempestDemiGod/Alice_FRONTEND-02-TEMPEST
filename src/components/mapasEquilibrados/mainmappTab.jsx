@@ -89,11 +89,11 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
   //   };
 
   return (
-    <div className="App">
-      <div className="outer">
-        <div>
-          <div className="title-map-box">Prompt de entrada</div>
-          <div className="textarea">
+    <div className="App lol">
+      <div className="outer parametros-textos">
+        <div className=" container-left">
+          <div >Prompt de entrada</div>
+          <div className="textarea text-extendido salida-extendido-textos">
             <textarea
               id="prompt"
               name="prompt"
@@ -102,12 +102,14 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div className="medio">
-        <button className="btn form-control btn btn-outline-dark medio-btn" onClick={() => callOpenAi()}>Generar Artefacto</button>
-        </div>
-        <div>
-          <div className="title-map-box">Salida</div>
-          <div className="textarea">
+        
+       <div className="btn-aprobar mt-4 mb-4">
+       <button className="  form-control btn btn-dark mx-auto medio-btn" onClick={() => callOpenAi()}>Generar Artefacto</button>
+       </div>
+        
+        <div className="salida-contenedor-lol pb-4 d-none">
+          <div >Salida</div>
+          <div className="textarea text-extendido">
             <textarea
               value={result}
               onChange={(e) => setResult(e.target.value)}
@@ -434,10 +436,10 @@ Solo una raíz ,deja como titulo: "mindmap" y seguidos por el root, use íconos 
   return (
     <div className="App">
       <div className="tab-buttons">
-      <button className="tab-button btn btn-outline-primary config-main" onClick={() => setModalConfig(false)}>
+      <button className="tab-button btn btn-primary config-main" onClick={() => setModalConfig(false)}>
       <i className="fa fa-cog" aria-hidden="true"></i>
         </button>
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
+        <button className="tab-button btn btn-success me-5" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
           className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}
@@ -470,7 +472,7 @@ Solo una raíz ,deja como titulo: "mindmap" y seguidos por el root, use íconos 
         />
       )}
       <div className="modalConfig" hidden={modalConfig}>
-        <section className="modal-contenedor-config container">
+        <section className="modal-contenedor-config text-dark container ">
           <SettingsTab
             token={token}
             setToken={setToken}
@@ -483,7 +485,7 @@ Solo una raíz ,deja como titulo: "mindmap" y seguidos por el root, use íconos 
             temperature={temperature}
             setTemperature={setTemperature}
           />
-          <button className="tab-button mt-4 mb-4 form-control btn btn-outline-success" onClick={() => setModalConfig(true) }>guardar configuracion</button>
+          <button className="tab-button mt-4 mb-4 form-control btn btn-success" onClick={() => setModalConfig(true) }>guardar configuracion</button>
         </section>
       </div>
     </div>

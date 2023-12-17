@@ -18,7 +18,7 @@ export const sombrero = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-      <div className="container">
+      <div className="container user-lol">
       <h1 className="title-top">Tecnica de los 6 somberos</h1>
       <MapaSombrero id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
     </div>

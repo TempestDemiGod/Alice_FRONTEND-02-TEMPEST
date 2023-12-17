@@ -42,11 +42,11 @@ async function verProyecto(){
 function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
 
   return (
-    <div className="App">
-      <div className="outer">
-        <div>
-          <div className="title-map-box">Prompt de entrada</div>
-          <div className="textarea">
+    <div className="App lol">
+      <div className="outer parametros-textos">
+        <div className=" container-left">
+          <div >Prompt de entrada</div>
+          <div className="textarea text-extendido salida-extendido-textos">
             <textarea
               id="prompt"
               name="prompt"
@@ -55,10 +55,10 @@ function MindmappingTab({ prompt, setPrompt, result, setResult, callOpenAi }) {
             ></textarea>
           </div>
         </div>
-        <div className="medio">
-        <button className="btn form-control btn btn-outline-dark medio-btn" onClick={() => callOpenAi()}>Generar Artefacto</button>
-        </div>
-        <div>
+        <div className="btn-aprobar mt-4 mb-4">
+       <button className="  form-control btn btn-dark mx-auto medio-btn" onClick={() => callOpenAi()}>Generar Artefacto</button>
+       </div>
+        <div className="d-none">
           <div className="title-map-box">Salida</div>
           <div className="textarea">
             <textarea
@@ -389,10 +389,10 @@ Solo una raíz, deja la palabra "mindmap" como encabezado seguido por root ,adem
   return (
     <div className="App">
       <div className="tab-buttons">
-      <button className="tab-button btn btn-outline-primary" onClick={() => setModalConfig(false)}>
+      <button className="tab-button btn btn-primary" onClick={() => setModalConfig(false)}>
       <i className="fa fa-cog" aria-hidden="true"></i>
         </button>
-        <button className="tab-button btn btn-outline-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
+        <button className="tab-button btn btn-success" onClick={() => guardarMapa()}>Guardar Mapa</button>
         <button
           className="d-none tab-button btn btn-outline-primary"
           onClick={() => setActiveTab("Mindmapping")}

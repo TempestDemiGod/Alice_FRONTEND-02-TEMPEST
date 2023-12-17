@@ -19,7 +19,7 @@ export const Customer = () => {
   return(
     <div className="contenedor-artefacto">
       <MenuMain />
-      <div className="container">
+      <div className="">
       <h1 className="title-top">CUSTOMER JOURNEY MAP</h1>
       <MapaCustomer id={apikey} tema={tema} api={id}  respuestaDB={respuesta} ArtecatoDB={ArtefactoID} description={descripcion}/>
     </div>

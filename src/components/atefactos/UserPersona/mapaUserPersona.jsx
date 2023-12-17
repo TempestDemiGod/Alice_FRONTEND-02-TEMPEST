@@ -18,7 +18,7 @@ export const UserPersona = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-       <div className="container">
+       <div className="container user-lol">
       <h1 className="title-top">USER PERSONA</h1>
       <MapUserPersona id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
     </div>

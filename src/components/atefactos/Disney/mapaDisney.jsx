@@ -19,7 +19,7 @@ export const Disney = () => {
   return(
     <div className="contenedor-artefacto">
        <MenuMain />
-       <div className="container">
+       <div className="container user-lol">
       <h1 className="title-top">Metodo Walt Disney</h1>
       <DisneyMap id={apikey} tema={tema} api={id} respuestaDB={respuesta} ArtecatoDB={ArtefactoID}/>
     </div>

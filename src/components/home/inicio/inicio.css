@@ -1,45 +1,61 @@
 
 .info-top-inicio{
-    display: flex;
-    /* background-color: red; */
-   
-}
-
-.info-top-inicio .left-info{
-    padding: 2em 2%;
-    margin-right: 6vw;
-    width: 60%;
-    text-align: justify;
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    grid-template-areas: "texto imagen";
 }
 .sombra{
     box-shadow: rgba(230, 92, 46, 0.4) 5px 5px, rgba(230, 92, 46, 0.3) 10px 10px, rgba(230, 92, 46, 0.2) 15px 15px, rgba(230, 92, 46, 0.1) 20px 20px, rgba(230, 92, 46, 0.05) 25px 25px;
-    width: 20vw;
-    height: max-content;
+    
 }
-.info-top-inicio div img{
-    /* height: 100%; */
-    width: 100%;
+.left-info{
+    grid-area: texto;
+}
+.derecha-info{
+    grid-area: imagen;
+    & > img{
+        border-radius: 1rem;
+        overflow: hidden;
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .info-top-inicio{
+        display: block;
+    }
+    .left-info{
+        margin-top: 2rem;
+    }
+  }
+
+  /*  */
+
+  .carrusel-inicio{
+    margin-bottom: 6vh;
+}
+
+.Acordion{
+    margin-top: 4rem;
+    margin: 0 !important;
+    width: 90% !important;
+}
+.Acordion .Acordion-02{
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: white;
+}
+
+.Acordion-03{
+    margin: 0 !important;
+    width: 100% !important;
 }
 
 .text-carusel{
     color: rgb(255, 255, 255);
     background-color: rgb(230, 92, 46, 0.8);
     box-shadow: 0 0 10px black, 0 10px 20px black, 10px 0 20px black;
-
-
-}
-.carrusel-inicio{
-    margin-bottom: 6vh;
-}
-.Acordion{
-    margin-top: 4rem;
-    width: 90% !important;
-}
-.Acordion .Acordion-02{
-    width: 100% !important;
-    background-color: white;
-}
-
-.Acordion-03{
-    width: 100% !important;
 }
